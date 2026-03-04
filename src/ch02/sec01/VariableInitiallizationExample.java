@@ -31,8 +31,8 @@ public class VariableInitiallizationExample {
 		System.out.println("X:"+x +", Y:"+y);
 		
 		int temp= x;
-		x = y; //이때는 int x 선언이 아니라 변수 x에 y의 값을 대입시켜야 하기 때문에 int같은변수 선언을 하지않음
-		y= temp;// 또한 위에서 이미 변수x에 대해 선언을 한 상태임
+		x = y; //이때는 int x 선언이 아니라 변수 x에 y의 값을 대입시켜야 하기 때문에 int같은변수 선언을 하지않는다 
+		y= temp;// 또한 위에서 이미 변수x에 대해 선언을 한 상태
 		System.out.println("X:"+x+", Y:"+y);
 		
 	}
