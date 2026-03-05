@@ -1,3 +1,10 @@
+/**
+ * @author zzoingsu
+ */
+/*
+ * title: StringConcatExample
+ *  Date: 2026.03.04
+ */
 package ch02.sec09;
 
 public class StringConcatExample {

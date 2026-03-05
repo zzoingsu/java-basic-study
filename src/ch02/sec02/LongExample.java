@@ -1,4 +1,11 @@
-package ch02.sec02;
+/**
+ * @author zzoingsu
+ */
+/*
+ * title: LongExample
+ *  Date: 2026.03.04
+ */
+ package ch02.sec02;
 
 public class LongExample {
 	public static void main(String[] args) {

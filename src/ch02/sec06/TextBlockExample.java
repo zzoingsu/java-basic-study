@@ -1,3 +1,10 @@
+/**
+ * @author zzoingsu
+ */
+/*
+ * title: TextBlockExample
+ *  Date: 2026.03.04
+ */
 package ch02.sec06;
 
 public class TextBlockExample {

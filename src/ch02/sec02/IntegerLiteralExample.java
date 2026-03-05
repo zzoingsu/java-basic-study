@@ -1,5 +1,11 @@
 package ch02.sec02;
-
+/**
+ * @author zzoingsu
+ */
+/*
+ * title: IntegerLiternalExample
+ *  Date: 2026.03.04
+ */
 public class IntegerLiteralExample {
 
 	public static void main(String[] args) {

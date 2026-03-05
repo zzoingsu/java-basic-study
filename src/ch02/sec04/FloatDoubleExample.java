@@ -1,3 +1,10 @@
+/**
+ * @author zzoingsu
+ */
+/*
+ * title: FloatDoubleExample
+ *  Date: 2026.03.04
+ */
 package ch02.sec04;
 
 public class FloatDoubleExample {
@@ -17,7 +24,7 @@ public class FloatDoubleExample {
 		double var = 3.14;
 		double var0 = 312e-2;
 		float var00 = 3.14f;  // float 타입에 대입하려면 리터널 끝에 f 를 붙혀야 컴파일에러가 안난다 
-		float var000 = 3e6f;
+		float var000 = 3e6f;  // float 타입이지만 정수라면자동타입 승격되기때문에 f를 붙히지않아도 된다 
 		System.out.println("var: "+ var);
 		System.out.println("var0: "+ var0);
 		System.out.println("var00: "+ var00);

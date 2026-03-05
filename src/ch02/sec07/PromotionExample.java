@@ -1,3 +1,10 @@
+/**
+ * @author zzoingsu
+ */
+/*
+ * title: PromotionExample
+ *  Date: 2026.03.04
+ */
 package ch02.sec07;
 
 public class PromotionExample {
