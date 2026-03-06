@@ -1,3 +1,7 @@
+/**
+ * Title:RadiusProblem
+ * Date: 2026.03.06
+ */
 package Problem02;
 import java.util.Scanner;  // import의 위치는 class 외부에 넣어야한다 이건 자바공식이다  
 //사용자로부터 원의 반지름을 입력받아 원의 넓이를 구하는 프로그램을 작성하라     
