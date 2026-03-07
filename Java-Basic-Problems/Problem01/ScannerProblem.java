@@ -25,7 +25,8 @@ public class ScannerProblem {
 		int result = x+y;
 		System.out.println("result:" + result + "\n\n");
 		
-	
+		scnx.close();
+		scny.close();
 		}
 /* 수정및개선방향 	
  * 1.Scanner scnx + new Scanner(System.in);을 두번만든것 -> 입력스트림 경쟁으로 충돌가능성 높음 

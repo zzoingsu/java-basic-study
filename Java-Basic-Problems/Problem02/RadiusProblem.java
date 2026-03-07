@@ -32,6 +32,8 @@ public class RadiusProblem {
 	System.out.printf("원의넓이: %.2f ", result2);  
 	// printf 사용시 콘솔에러 발생 -> 개선및수정버전에서는 반지름의 길이가 정수뿐만이 아니라 실수임도 생각하고있기때문에 printf에서 d를 사용한다면 컴파일에러는 아니지만
 	// 형식 지정자와 값의 타입이 맞지 않아서 실행 중 오류가 발생한다
+	scr.close();
+	scn.close();
 	}              
 
 }
