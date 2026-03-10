@@ -1,3 +1,8 @@
+/**
+ * Title: ArithmeticOperatorExample
+ * Date: 2026.03.09
+ * @author zzoingsu
+ */
 package ch03.sec02;
 
 public class ArithmeticOperatorExample {

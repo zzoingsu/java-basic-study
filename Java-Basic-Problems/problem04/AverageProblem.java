@@ -1,6 +1,11 @@
+/**
+ * Title: AverageProblem
+ * Date: 2026.03.09
+ * @author zzoingsu
+ */
 // 사용자로부터 이름,국어성적,영어성적,수학성적을 입력받고 점수의 총점과평균을 구하시오
 // 조건: Scanner 사용, 점수는 정수로 출력, 평균은 소수점두자리까지 출력 
-package problem04;
+package Problem04;
 
 import java.util.Scanner;
 

@@ -1,6 +1,7 @@
 /**
  * Title: Scannerproblem
  * Date: 2026.03.06
+ * @author zzoingsu
  */
 package Problem01;
 //두 정수를 입력받아 합을 출력하라 

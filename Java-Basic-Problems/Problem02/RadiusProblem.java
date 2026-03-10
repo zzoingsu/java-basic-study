@@ -1,6 +1,7 @@
 /**
  * Title:RadiusProblem
  * Date: 2026.03.06
+ * @author zzoingsu
  */
 package Problem02;
 import java.util.Scanner;  // import의 위치는 class 외부에 넣어야한다 이건 자바공식이다  
