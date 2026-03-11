@@ -30,11 +30,13 @@ public class ScopeJudgmentProblem {
 		
 		boolean greaterthan10 = inputData2 > 10;
 		boolean lessthan20 = inputData2 <20;
-		boolean between10And20 = inputData >= 10 && inputData >=20;
+		boolean between10And20 = inputData2 >= 10 && inputData2 <=20;
 		
 		System.out.printf("10보다크다: %b\n20보다작다: %b\n10과20사이: %b",greaterthan10,lessthan20, between10And20);
 // boolean 10<inputData<20이 안되는이유 자바는 기본적으로 왼쪽에서부터 읽는데 이떄 처음 10<inputData에서 true 가나오면
 // 이는 숫자가 아니기때문에 이를 인지하지못함으로 에러가 난다  
+		scn.close();
+		sc.close();
 	}
 
 }

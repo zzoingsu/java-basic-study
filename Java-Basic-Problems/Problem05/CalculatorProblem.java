@@ -51,5 +51,7 @@ public class CalculatorProblem {
 	// String str4 = sc.nextLine();
 	// int b = Integer.parseInt(); 부분을 한 문장으로 줄일수있는데 이는 int b = Integer.parseInt(nextLine());으로 쓰면 한문장으로 축소가능하다
 	// nextLine()은 항상 입력된수를 문자열로 저장하기에 굳이 String을 선언하고 변환하지 않아도된다 
+	scn.close();
+	sc.close();
 	}
 }
