@@ -52,7 +52,6 @@ public class ConfirmationQuestion {
 				}
 			}
 		}	
-		//문제 6
 		//문제 7
 			Scanner sc = new Scanner(System.in);
 			int acount = 0;
@@ -90,6 +89,8 @@ public class ConfirmationQuestion {
 				};
 				
 			}
+			sc.close();
+			
 		}
 	
 	}			
