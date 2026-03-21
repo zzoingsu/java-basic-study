@@ -14,14 +14,14 @@ public class DoWhileExample {
 			System.out.print(">");
 			inputString = scanner.nextLine();
 			System.out.println(inputString);
-		} while ( ! inputString.equals("q"));{  // 조건식이 참일때 반복하기때문에 !를 넣어야한다
+		} while ( ! inputString.equals("q")); // 조건식이 참일때 반복하기때문에 !를 넣어야한다
 		
 		System.out.println();
 		System.out.println("시스템 종료");
 		
 		scanner.close();
 		
-		}
+		
 	}
 
 }

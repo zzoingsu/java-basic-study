@@ -42,7 +42,7 @@ public class MenuProgram {
 						if (secondNumber == 0 ) {
 							System.out.print("잘못된 숫자입력입니다");
 							System.out.println(" ");
-							continue;
+							break;
 						} else {
 							result = firstNumber / secondNumber;
 						}
@@ -57,5 +57,12 @@ public class MenuProgram {
 		}
 	}
             sc.close();
+/*개선및수정방향
+ * 1. 잘못된 번호를 눌러도 숫자 입력을 한다 
+ * 2. 입력값은 int로 받는데 아래에서는 double로 받음 (통일성 저해)
+ *  3. 잘못된 번호를 눌러도 결과값이 나온다
+ */
+           
+           
 	}
 }

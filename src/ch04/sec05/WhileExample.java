@@ -42,6 +42,7 @@ public class WhileExample {
 		}
 		System.out.print("프로그램 종료");
 		sc.close();
+
 	}
 
 }
