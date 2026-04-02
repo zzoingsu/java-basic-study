@@ -9,7 +9,13 @@ public class MediaMain {
 		myMedia.play();
 		yourMedia.play();
 		
+		if (myMedia instanceof Music music) {
+			music.showSinger();
+		}
 		
+		if (yourMedia instanceof Video video) {
+			video.showResolution();
+		}
 	}
 
 }

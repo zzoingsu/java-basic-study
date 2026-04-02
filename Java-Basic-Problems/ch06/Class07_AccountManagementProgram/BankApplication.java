@@ -10,7 +10,7 @@ public class BankApplication {
 		String[] menuArray = menu.split(",");
 		Account[] accounts =new Account[100];   
 		int accountNumberCount = 0;
-		
+		for(int i = 0; i < accounts.length; i++) {
 		bankApplication : while (true) {
 			System.out.println("");
 			System.out.println("-------------------------------------------------");
@@ -92,6 +92,7 @@ public class BankApplication {
 				System.out.println("프로그램 종료");
 				break bankApplication;
 				}
+			}
 			}
 			
 		}
