@@ -8,9 +8,9 @@ public class BankApplication {
 		Scanner sc = new Scanner(System.in);
 		String menu = "계좌 생성,계좌 목록,예금,출금,종료";
 		String[] menuArray = menu.split(",");
+		boolean isHasAccount;
 		Account[] accounts =new Account[100];   
-		int accountNumberCount = 0;
-		for(int i = 0; i < accounts.length; i++) {
+					
 		bankApplication : while (true) {
 			System.out.println("");
 			System.out.println("-------------------------------------------------");
@@ -26,8 +26,13 @@ public class BankApplication {
 				System.out.println("---------------");
 				continue;
 			}
-			if (myAccount == null && (menuNumber <= 4 && menuNumber > 1)) {
-				System.out.println("계좌없이 사용 할수없는 서비스입니다");
+			for (int i = 0; i < accounts.length; i++) {
+				if (accounts[i] != null) {
+					isHasAccount = true; 
+				}
+						}
+			if (isHasAccount = false && (menuNumber <= 4 && menuNumber > 1)) {
+				System.out.println("계좌없이 사용 할 수 없는 서비스입니다");
 				System.out.println("---------------");
 				continue;
 			}else {
@@ -35,12 +40,8 @@ public class BankApplication {
 				System.out.println("---------------");
 			}
 		
-			
-			
-	
 			switch (menuNumber) {
 			case 1 -> {	
-				
 				System.out.print("계좌 번호: ");
 				int accountNumber = Integer.parseInt(sc.nextLine());
 				System.out.print("계좌주: ");
@@ -50,43 +51,49 @@ public class BankApplication {
 				if (initialDeposit < 0) {
 					System.out.println("잘못된 입금 금액입니다");
 				}
-					for ()
-				myAccount = new Account(accountNumber, accountHolder, initialDeposit);
-				System.out.println("계좌가 생성되었습니다");
-				continue;
+					for (int i = 0; i < accounts.length; i++) {
+						if (accounts[i] == null) {
+							accounts[i] = new Account(accountNumber, accountHolder, initialDeposit);
+							}
+				}
+					System.out.println("계좌가 생성되었습니다");
+					break;
 			}
 			case 2 -> {
-				myAccount.showAccountInfo();
-				continue;
+				for( int i = 0; i < accounts.length; i++) {
+					if (accounts[i] != null) {
+						accounts[i].showAccountInfo();
+						continue;
+					}
+				}
 			}
 			case 3 -> {
 				System.out.print("계좌번호: ");
 				int depositAccount = Integer.parseInt(sc.nextLine());
-				boolean isMatched = myAccount.checkAccountNumber(depositAccount);
+				Account foundAccount = Account.findAccount(accounts, depositAccount);
 				
-				if (isMatched) {
+				if (foundAccount != null) {
 					System.out.print("예금액: ");
 					int depositMoney = Integer.parseInt(sc.nextLine());
-					myAccount.deposit(depositMoney);
-					continue;
+					foundAccount.deposit(depositMoney);
 				}else {
 					System.out.println("일치하는 계좌가 없습니다");
-					continue;
 				}
+				continue;
 			}
 			case 4 -> {
 				System.out.print("계좌번호: ");
 				int withdrawAccount = Integer.parseInt(sc.nextLine());
-				boolean isMatched = myAccount.checkAccountNumber(withdrawAccount);
+				Account foundAccount = Account.findAccount(accounts, withdrawAccount);
 				
-				if (isMatched) {
+				if (foundAccount != null) {
 					System.out.print("출금액: ");
 					int withdrawMoney = Integer.parseInt(sc.nextLine());
-					myAccount.withDraw(withdrawMoney);
+					foundAccount.withdraw(withdrawMoney);
 				}else {
 					System.out.println("일치하는 계좌가 없습니다");
-					continue;
 				}
+				continue;
 			}
 			case 5 -> {
 				System.out.println("프로그램 종료");
@@ -95,7 +102,7 @@ public class BankApplication {
 			}
 			}
 			
-		}
+		
 		sc.close();
 	}
 	// 계좌가 계속 초기화되는 오류발생 -> 반복문 외부에 위치함으로 해결
@@ -112,4 +119,5 @@ public class BankApplication {
 	 * 
 	 */
 	}
+
 

@@ -20,7 +20,7 @@ public class Account {
 		System.out.println("결과> 예금이 성공되었습니다");
 	}
 	
-	void withDraw (int withdrawMoney) {
+	void withdraw (int withdrawMoney) {
 		if (withdrawMoney < 0) {
 			System.out.println("결과> *잘못된 입력입니다*");
 			return;
@@ -43,5 +43,15 @@ public class Account {
 	
 	void showAccountInfo () {
 		System.out.println( accountNumber + "\t" + accountHolder + "\t" + accountBalance );
+	}
+
+	
+	static Account findAccount(Account[] accounts, int accountNumber) {
+		for ( int i = 0; i < accounts.length; i++) {
+			if (accounts[i] != null && accounts[i].checkAccountNumber(accountNumber)) {
+				return accounts[i];
+			}
+		}
+		return null;
 	}
 }
