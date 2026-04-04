@@ -44,28 +44,35 @@ public class LibraryApplication {
 									for ( int n = 0; n < books.length; n++) {
 										if (books[n] != null && books[n].bookNumber.equals(bookNumber)) {
 											System.out.println("중복된 도서번호입니다\n다시 시도해주시길 바랍니다");
-											return;
+											continue;
 										}
 									}
 									books[i] = new Book(bookNumber, title, author);
+									System.out.println("등록 완료");
 									break;
 										}
 									}
-								}
+								
 						}if (bookOrEBook == 2) {
 					System.out.print("파일크기(MB): ");
 					int fileSize = Integer.parseInt(sc.nextLine());
 						for (int i = 0; i < books.length; i++) {
 							if (books[i] == null) {
+								for ( int n = 0; n < books.length; n++) {
+									if (books[n] != null && books[n].bookNumber.equals(bookNumber)) {
+										System.out.println("중복된 도서번호입니다\n다시 시도해주시길 바랍니다");
+										continue;
+									}
+								}
 								books[i] = new EBook(bookNumber, title, author, fileSize);
+								System.out.println("등록 완료");
 								break;
 							}
 						}
 				}
-				System.out.println("등록 완료");
 						
 					}
-			}
+			
 			case 2 -> {
 				for (int i = 0; i < books.length; i++) {
 					if (books[i] != null) {

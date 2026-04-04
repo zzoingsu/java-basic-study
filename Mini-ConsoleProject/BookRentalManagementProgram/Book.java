@@ -21,7 +21,7 @@ public class Book {
 		return null;
 	}
 	public void borrow ( Book bookNumberMatched, String bookNumber) {
-		if (!bookNumberMatched.isBorrowed) {
+		if (!isBorrowed) {
 			System.out.println("대여 가능한 도서입니다\n대여 처리되었습니다");
 			isBorrowed = true;
 		}else {
@@ -29,8 +29,8 @@ public class Book {
 		}
 	}
 	
-	public void returnBook (Book bookNumberMatched, String bookNUmber) {
-		if(bookNumberMatched.isBorrowed) {
+	public void returnBook (Book bookNumberMatched, String bookNumber) {
+		if(isBorrowed) {
 			System.out.println("반납 처리되었습니다");
 			isBorrowed = false;
 		}else {
@@ -42,12 +42,5 @@ public class Book {
 		System.out.println("일반책 | 도서번호: " + bookNumber + " | 제목: " + title + " | 저자: " + author + " | 대여 여부: " + isBorrowed);
 	}
 	
-	public boolean duplicateCheck (Book books[], String bookNumber) {
-		for ( int i = 0; i < books.length; i++) {
-			if (books[i].bookNumber.equals(bookNumber)) {
-				return false;
-			}
-		}return true;
-	}
-
+	
 }
