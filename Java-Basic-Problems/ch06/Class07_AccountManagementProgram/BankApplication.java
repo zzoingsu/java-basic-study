@@ -8,7 +8,7 @@ public class BankApplication {
 		Scanner sc = new Scanner(System.in);
 		String menu = "계좌 생성,계좌 목록,예금,출금,종료";
 		String[] menuArray = menu.split(",");
-		boolean isHasAccount;
+		boolean isHasAccount = false;
 		Account[] accounts =new Account[100];   
 					
 		bankApplication : while (true) {
@@ -29,9 +29,10 @@ public class BankApplication {
 			for (int i = 0; i < accounts.length; i++) {
 				if (accounts[i] != null) {
 					isHasAccount = true; 
+					break;
 				}
 						}
-			if (isHasAccount = false && (menuNumber <= 4 && menuNumber > 1)) {
+			if (!isHasAccount && (menuNumber <= 4 && menuNumber > 1)) {
 				System.out.println("계좌없이 사용 할 수 없는 서비스입니다");
 				System.out.println("---------------");
 				continue;
@@ -50,22 +51,42 @@ public class BankApplication {
 				int initialDeposit = Integer.parseInt(sc.nextLine());
 				if (initialDeposit < 0) {
 					System.out.println("잘못된 입금 금액입니다");
+					continue;
 				}
+				Account foundAccount = Account.findAccount(accounts, accountNumber);
+				if(foundAccount != null) {
+					System.out.println("해당 계좌번호가 이미 존재합니다");
+					continue;
+				}
+				boolean isArrayHasLefted = false;
 					for (int i = 0; i < accounts.length; i++) {
 						if (accounts[i] == null) {
 							accounts[i] = new Account(accountNumber, accountHolder, initialDeposit);
+							isArrayHasLefted = true;
+							break;
 							}
-				}
+						}
+					if(!isArrayHasLefted ) {
+						System.out.println("더이상 계좌를 생성할수없습니다");
+						continue;
+					}
 					System.out.println("계좌가 생성되었습니다");
-					break;
-			}
+					continue;
+				}
+			
+			
 			case 2 -> {
+				boolean hasPrinted = false;
 				for( int i = 0; i < accounts.length; i++) {
 					if (accounts[i] != null) {
 						accounts[i].showAccountInfo();
-						continue;
+						hasPrinted = true; 
 					}
 				}
+				if (!hasPrinted) {
+					System.out.println("생성된 계좌가 없습니다");
+				}
+				continue;
 			}
 			case 3 -> {
 				System.out.print("계좌번호: ");
