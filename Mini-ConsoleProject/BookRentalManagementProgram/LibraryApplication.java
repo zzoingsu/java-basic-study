@@ -25,6 +25,17 @@ public class LibraryApplication {
 			
 			switch(menuNumber) {
 			case 1 -> {
+				boolean isArrayLeft = false;
+				for ( int i = 0;i < books.length; i++) {
+					if (books[i] == null) {
+						isArrayLeft = true; 
+						break;
+					}
+				}
+				if(!isArrayLeft) {
+					System.out.println("더이상 책을 등록할수없습니다");
+					continue;
+				}
 				System.out.println("1. 일반책 | 2. 전자책");
 				System.out.print("선택 > ");
 				int bookOrEBook = Integer.parseInt(sc.nextLine());
@@ -34,66 +45,47 @@ public class LibraryApplication {
 				}
 					System.out.print("도서번호: ");
 					String bookNumber = sc.nextLine();
+					if (Book.findBook(books, bookNumber) != null) {
+						System.out.println("중복된 도서번호 입니다");
+						continue;
+					}
 					System.out.print("제목: ");
 					String title = sc.nextLine();
 					System.out.print("저자: ");
 					String author = sc.nextLine();
+					Book newBook;
+					
 						if(bookOrEBook == 1) {
-							for(int i = 0; i < books.length; i++) {
-								if (books[i] == null) {
-									for ( int n = 0; n < books.length; n++) {
-										if (books[n] != null && books[n].bookNumber.equals(bookNumber)) {
-											System.out.println("중복된 도서번호입니다\n다시 시도해주시길 바랍니다");
-											continue;
-										}
-									}
-									books[i] = new Book(bookNumber, title, author);
-									System.out.println("등록 완료");
-									break;
-										}
-									}
-								
-						}if (bookOrEBook == 2) {
+							 newBook = new Book(bookNumber, title, author);
+						}else {
 					System.out.print("파일크기(MB): ");
 					int fileSize = Integer.parseInt(sc.nextLine());
-						for (int i = 0; i < books.length; i++) {
-							if (books[i] == null) {
-								for ( int n = 0; n < books.length; n++) {
-									if (books[n] != null && books[n].bookNumber.equals(bookNumber)) {
-										System.out.println("중복된 도서번호입니다\n다시 시도해주시길 바랍니다");
-										continue;
-									}
-								}
-								books[i] = new EBook(bookNumber, title, author, fileSize);
-								System.out.println("등록 완료");
-								break;
+					newBook = new EBook(bookNumber, title, author, fileSize);
+						}
+						
+					 for (int i = 0; i < books.length; i++) {
+									if (books[i] == null) {
+										books[i] = newBook;
+										System.out.println("등록 완료");
+										break;	
 							}
 						}
-				}
-						
 					}
 			
 			case 2 -> {
 				for (int i = 0; i < books.length; i++) {
 					if (books[i] != null) {
-						if (books[i] instanceof EBook eBook) {
 							System.out.println();
-							eBook.showInfo();
-							continue;
-						} if (books[i] instanceof Book book) {
-							System.out.println();
-							book.showInfo();
-							continue;
-						}
+							books[i].showInfo();
 					}
 				}
 			}
 			case 3 -> {
 				System.out.print("도서번호 입력: ");
 				String bookNumber = sc.nextLine();
-				Book bookNumberMatched = Book.bookNumberMatch(books, bookNumber);
-				if (bookNumberMatched != null) {
-				bookNumberMatched.borrow(bookNumberMatched, bookNumber);
+				Book matchedBook = Book.findBook(books, bookNumber);
+				if (matchedBook != null) {
+				matchedBook.borrow();
 				continue;
 				}else {
 					System.out.println("일치하는 도서번호가 존재하지않습니다");
@@ -102,9 +94,9 @@ public class LibraryApplication {
 			case 4 -> {
 				System.out.print("도서번호 입력: ");
 				String bookNumber = sc.nextLine();
-				Book bookNumberMatched = Book.bookNumberMatch(books, bookNumber);
-				if (bookNumberMatched != null) {
-					bookNumberMatched.returnBook(bookNumberMatched, bookNumber);
+				Book matchedBook = Book.findBook(books, bookNumber);
+				if (matchedBook != null) {
+					matchedBook.returnBook();
 					continue;
 				}else {
 					System.out.println("일치하는 도서번호가 존재하지않습니다");
@@ -116,6 +108,7 @@ public class LibraryApplication {
 			}
 			}
 		}
+		sc.close();
 	}
 /** 예외처리 구상
  * 1. 메뉴 오입력
