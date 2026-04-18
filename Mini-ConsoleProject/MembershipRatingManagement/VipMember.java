@@ -9,14 +9,10 @@ public class VipMember extends Member {
 	}
 	
 	@Override
-	public void showInfo(Member[] members) {
-		for(int i = 0; i < members.length; i ++) {
-			if(members[i] != null) {
+	public void showInfo () {
 				System.out.println(
 						"VIP회원 | 회원번호: "+getMembershipNumber()+" | 이름: "+getName()+" | 포인트: "+getMembershipPoint()+" | 혜택: "+benefitName
 						);
-			}
-		}
 	}
 
 }

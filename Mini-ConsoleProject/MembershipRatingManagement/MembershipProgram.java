@@ -28,6 +28,7 @@ public class MembershipProgram {
 				for(int i = 0; i < members.length; i++) {
 					if(members[i] == null) {
 						isArrayLeft = true;
+						break;
 					}
 				}
 				if(isArrayLeft == false) {
@@ -37,8 +38,17 @@ public class MembershipProgram {
 				System.out.println("1. 일반회원 | 2. VIP회원");
 				System.out.print("선택 >");
 				int memberOrVip = Integer.parseInt(sc.nextLine());
+				if(memberOrVip <= 0 || memberOrVip >= 3) {
+					System.out.println("잘못된 입력입니다");
+					continue;
+				}
 				System.out.print("회원번호: ");
 				String membershipNumber = sc.nextLine();
+				Member checkedNumber = Member.duplicationCheck(members, membershipNumber);
+				if(checkedNumber != null) {
+					System.out.println("중복된 회원번호입니다");
+					continue;
+				}
 				System.out.print("이름: ");
 				String name = sc.nextLine();
 				System.out.print("현재 포인트: ");
@@ -47,7 +57,7 @@ public class MembershipProgram {
 					for(int i = 0; i < members.length; i++) {
 						if(members[i] == null) {
 							members[i] = new Member(membershipNumber, name, membershipPoint);
-							continue;
+							break;
 						}
 					}
 				}
@@ -57,21 +67,58 @@ public class MembershipProgram {
 					for(int i = 0; i < members.length; i++) {
 						if(members[i] == null) {
 							members[i] = new VipMember(membershipNumber, name, membershipPoint,benefitName);
-							continue;
+							break;
 						}
 					}
+				}
+				System.out.println("등록 완료");
+				
+			}
+			case 2 -> {
+				boolean isNoMember = true;
+				for(int i = 0; i < members.length; i++) {
+					if(members[i] != null) {
+						members[i].showInfo();
+						isNoMember = false;
+					}
+				}
+				if(isNoMember) {
+					System.out.println("등록된 회원이 없습니다");
+				}
+			}
+			case 3 -> {
+				System.out.print("회원번호 입력: ");
+				String MembershipNumber = sc.nextLine();
+				Member checkedNumber = Member.duplicationCheck(members, MembershipNumber);
+				if(checkedNumber == null) {
+					System.out.println("일치하는 회원번호가 존재하지 않습니다");
+					continue;
 				}else {
-					System.out.println("잘못된 입력입니다");
-					
+					System.out.print("적립포인트: ");
+					int earnedPoint = Integer.parseInt(sc.nextLine());
+					checkedNumber.pointsEarned(earnedPoint);
+				}
+			}
+			case 4 -> {
+				System.out.print("회원번호 입력: ");
+				String MembershipNumber = sc.nextLine();
+				Member checkedNumber = Member.duplicationCheck(members, MembershipNumber);
+				if(checkedNumber == null) {
+					System.out.println("일치하는 회원번호가 존재하지 않습니다");
+					continue;
+				}else {
+					System.out.print("차감포인트: ");
+					int earnedPoint = Integer.parseInt(sc.nextLine());
+					checkedNumber.pointsDeducted(earnedPoint);
 				}
 			}
 			case 5 -> {
 				System.out.println("프로그램을 종료합니다");
 				break menu;
-			}
+					}
+				}
 			}
 		}
-		
 	}
 
-}
+
