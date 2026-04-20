@@ -8,16 +8,17 @@ public class Seminar {
 		this.nameOfSeminar = nameOfSeminar;
 		this.capacityOfPeople = capacityOfPeople;
 	}
-	public class applicant {
+	public class Applicant {
 		String name;
-		String phoneNumber;
+		int phoneNumber;
 		String status;
 		
-		applicant(String name, String phoneNumber) {
+		Applicant(String name, int phoneNumber) {
 			this.name = name;
 			this.phoneNumber = phoneNumber;
 		}
 
 	}
+	
 
 }
