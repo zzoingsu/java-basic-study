@@ -70,7 +70,7 @@ public class SeminarApplication {
 			
 			}
 		}
-		
+		sc.close();
 	}
 
 }
