@@ -28,6 +28,28 @@ public class Seminar {
 			}return null;	
 		}
 	}
+	
+	public static void showInfo(Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
+		boolean isArrayEmpty = true;
+		for(int i = 0; i < seminarApplicants.length; i++) {
+			if(seminarApplicants[i] != null) {
+				System.out.println("세미나 신청자 | 이름: [" + seminarApplicants[i].name + "] | 연락처: [" + seminarApplicants[i].phoneNumber + "]");
+				isArrayEmpty = false;
+			}
+		}if(isArrayEmpty) {
+			System.out.println("세미나 신청자가 없습니다");
+		}
+		isArrayEmpty = true;
+		// 변수 재사용을 위해 값 초기화
+		for(int i = 0; i < standByApplicants.length; i++) {
+			if(standByApplicants[i] != null) {
+				System.out.println("대기신청자    | 이름: [" + standByApplicants[i].name + "] | 연락처: [" + standByApplicants[i].phoneNumber + "]");
+				isArrayEmpty = false;
+			}
+		}if(isArrayEmpty) {
+			System.out.println("대기신청자가 없습니다");
+		}
+	}
 }
 	
 
