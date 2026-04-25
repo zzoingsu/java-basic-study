@@ -17,15 +17,15 @@ public class Seminar {
 			this.name = name;
 			this.phoneNumber = phoneNumber;
 		}
-		public static Applicant findDuplicate(Applicant applicants[],String name, int phoneNumber) {
+		public static int findDuplicate(Applicant[] applicants,String name, int phoneNumber) {
 			for (int i = 0; i < applicants.length; i++) {
 				if(applicants[i] == null) {
 					continue;
 				}
-				if(applicants[i].name.equals(name) && applicants[i].phoneNumber == phoneNumber) {
-					return applicants[i];
+				if(applicants[i] != null && (applicants[i].name.equals(name) && applicants[i].phoneNumber == phoneNumber)) {
+					return i;
 				}
-			}return null;	
+			}return -1;	
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class Seminar {
 		// 변수 재사용을 위해 값 초기화
 		for(int i = 0; i < standByApplicants.length; i++) {
 			if(standByApplicants[i] != null) {
-				System.out.println("대기신청자    | 이름: [" + standByApplicants[i].name + "] | 연락처: [" + standByApplicants[i].phoneNumber + "]");
+				System.out.println("대기신청자   | 이름: [" + standByApplicants[i].name + "] | 연락처: [" + standByApplicants[i].phoneNumber + "]");
 				isArrayEmpty = false;
 			}
 		}if(isArrayEmpty) {
