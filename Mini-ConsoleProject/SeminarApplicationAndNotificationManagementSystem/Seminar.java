@@ -8,6 +8,15 @@ public class Seminar {
 		this.nameOfSeminar = nameOfSeminar;
 		this.capacityOfPeople = capacityOfPeople;
 	}
+	
+	public String getNameOfSeminar() {
+		return nameOfSeminar;
+	}
+	
+	public int getCapcityOfPeople() {
+		return capacityOfPeople;
+	}
+	
 	public class Applicant {
 		String name;
 		int phoneNumber;
@@ -29,7 +38,7 @@ public class Seminar {
 		}
 	}
 	
-	public static void showInfo(Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
+	public static void showApplicantsInfo(Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
 		boolean isArrayEmpty = true;
 		for(int i = 0; i < seminarApplicants.length; i++) {
 			if(seminarApplicants[i] != null) {
@@ -49,6 +58,14 @@ public class Seminar {
 		}if(isArrayEmpty) {
 			System.out.println("대기신청자가 없습니다");
 		}
+	}
+	
+	public static void showSeminarInfo(Seminar seminar, Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
+		System.out.println("세미나 이름: [" + seminar.getNameOfSeminar() + "]" );
+		System.out.println("정원: " + seminar.getCapcityOfPeople());
+		System.out.println("전체 신청자수: " + seminarApplicants.length + standByApplicants.length);
+		System.out.println("신청완료 수: " + seminarApplicants.length);
+		System.out.println("")
 	}
 }
 	

@@ -109,6 +109,9 @@ public class SeminarApplication {
 				
 			}
 			case 4 -> {
+				// 세미나 정보 출력
+			}
+			case 5-> {
 				System.out.println("프로그램을 종료합니다");
 				break application;
 			}
