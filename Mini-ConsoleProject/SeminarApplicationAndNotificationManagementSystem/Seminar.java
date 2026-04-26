@@ -26,6 +26,21 @@ public class Seminar {
 			this.name = name;
 			this.phoneNumber = phoneNumber;
 		}
+		
+		public static boolean isArrayFull(Applicant[] applicants) {
+			boolean isArrayFull = true;
+			for(int i = 0; i<applicants.length; i++) {
+				if(applicants[i] == null) {
+					isArrayFull = false;
+					break;
+				}
+			}if(isArrayFull) { 
+				return true;
+			}else {
+				return false;
+			}
+		}// 배열에 남은 자리가있는지 확인한다
+		
 		public static int findDuplicate(Applicant[] applicants,String name, int phoneNumber) {
 			for (int i = 0; i < applicants.length; i++) {
 				if(applicants[i] == null) {
@@ -36,7 +51,7 @@ public class Seminar {
 				}
 			}return -1;	
 		}
-	}
+	}// 배열의 중복을 확인한다
 	
 	public static void showApplicantsInfo(Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
 		boolean isArrayEmpty = true;
@@ -61,11 +76,24 @@ public class Seminar {
 	}
 	
 	public static void showSeminarInfo(Seminar seminar, Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
+		int seminarApplicantsNum = 0; 
+		for(int i = 0; i<seminarApplicants.length; i++) {
+			if(seminarApplicants[i] != null) {
+				seminarApplicantsNum++;
+			}
+		}// 세미나신청 인원
+		int standByApplicantsNum = 0;
+		for(int i = 0; i<standByApplicants.length; i++) {
+			if(standByApplicants[i] != null) {
+				standByApplicantsNum++;
+			}
+		} // 대기신청 인원
 		System.out.println("세미나 이름: [" + seminar.getNameOfSeminar() + "]" );
-		System.out.println("정원: " + seminar.getCapcityOfPeople());
-		System.out.println("전체 신청자수: " + seminarApplicants.length + standByApplicants.length);
-		System.out.println("신청완료 수: " + seminarApplicants.length);
-		System.out.println("")
+		System.out.println("정원: " + seminar.getCapcityOfPeople() + "명");
+		System.out.println("전체 신청자 수: " + (seminarApplicantsNum + standByApplicantsNum) + "명");
+		System.out.println("신청완료 수: " + seminarApplicantsNum+ "명");
+		System.out.println("대기신청 수: " + standByApplicantsNum + "명");
+		System.out.println("남은 좌석 수: " + (seminar.getCapcityOfPeople() - seminarApplicantsNum + "석"));
 	}
 }
 	

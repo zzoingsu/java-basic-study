@@ -11,8 +11,6 @@ public class SeminarApplication {
 		Seminar seminar = new Seminar("세미나", 50);
 		Seminar.Applicant[] seminarApplicants = new Seminar.Applicant[1];
 		Seminar.Applicant[] standByApplicants = new Seminar.Applicant[1];
-		boolean isSeminarLeft = false;
-		boolean isArrayLeft = false;
 		
 		application : while(true) {
 			System.out.println();
@@ -24,40 +22,59 @@ public class SeminarApplication {
 			System.out.println("   [" + menuArray[menuNum - 1] + "]");
 			
 			switch (menuNum) {
-			
 			case 1 -> {
+				boolean isSeminarFull = Seminar.Applicant.isArrayFull(seminarApplicants);
+				boolean isStandByFull = Seminar.Applicant.isArrayFull(standByApplicants);
+				// 각각의 배열에 빈자리가있는지 확인
+				if(isSeminarFull && isStandByFull) {
+					System.out.println("[신청이 마감되었습니다]");
+					continue;
+					// 모든 배열에 빈자리가 없을떄 출력
+				}
 				System.out.print("이름: ");
 				String name = sc.nextLine();
 				System.out.print("연락처: ");
 				int phoneNumber = Integer.parseInt(sc.nextLine());
 				int findDuplicate = Seminar.Applicant.findDuplicate(seminarApplicants, name, phoneNumber);
 				if(findDuplicate != -1) {
-					System.out.println("신청자 정보와 중복됩니다");
+					System.out.println("[신청자 정보와 중복됩니다]");
 					continue;
 				}
-				for(int i = 0; i < seminarApplicants.length; i++) {
+				if(!isSeminarFull) {
+					
+				}
+				if(!isStandByFull) {
+					
+				}
+				
+				
+				
+				 /** 
+				    boolean isSeminarLeft = false;
+					boolean isArrayLeft = false;
+				    for(int i = 0; i < seminarApplicants.length; i++) {
 					if(seminarApplicants[i] == null) {
 						seminarApplicants[i] = seminar.new Applicant(name,phoneNumber);
 						isSeminarLeft = true;
-						System.out.println("세미나가 신청되었습니다");
+						System.out.println("[세미나가 신청되었습니다]");
 						break;
-					}else {
-						isSeminarLeft = false;
 					}
-				}if(!isSeminarLeft) {
+				}
+				  if(!isSeminarLeft) {
 					for(int i = 0; i < standByApplicants.length; i++) {
 						if(standByApplicants[i] == null) {
 							standByApplicants[i] = seminar.new Applicant(name,phoneNumber);
-							System.out.println("세미나 신청인원 초과로 인해 대기신청자로 접수되었습니다");
-							System.out.println("대기번호 " +(i+1)+ "번");
+							System.out.println("[세미나 신청인원 초과로 인해 대기신청자로 접수되었습니다]");
+							System.out.println("[대기번호 " +(i+1)+ "번]");
 							isArrayLeft = true;
 							break;
 						}
 					}
 					if(!isArrayLeft) {
-						System.out.println("대기인원이 마감되었습니다");
+						System.out.println("[대기인원이 마감되었습니다]");
 					}
 				}
+				*/
 			}
 			case 2 -> {
 				boolean isArrayEmpty = true;
@@ -73,7 +90,7 @@ public class SeminarApplication {
 					int foundIndex = Seminar.Applicant.findDuplicate(seminarApplicants, name, phoneNumber);
 					// 중복검사
 					if(foundIndex == -1) {
-						System.out.println("일치하는 회원이 없습니다");
+						System.out.println("[일치하는 회원이 없습니다]");
 						continue;
 					}else {
 						for(int i = 0; i < standByApplicants.length; i++) {
@@ -102,17 +119,19 @@ public class SeminarApplication {
 					}
 				}
 			}
-				System.out.println("신청이 취소되었습니다");
+				System.out.println("[신청이 취소되었습니다]");
 			}
 			case 3 -> {
-				Seminar.showInfo(seminarApplicants, standByApplicants);
+				Seminar.showApplicantsInfo(seminarApplicants, standByApplicants);
+				// 신청자 정보 출력
 				
 			}
 			case 4 -> {
+				Seminar.showSeminarInfo(seminar, seminarApplicants, standByApplicants);
 				// 세미나 정보 출력
 			}
 			case 5-> {
-				System.out.println("프로그램을 종료합니다");
+				System.out.println("[프로그램을 종료합니다]");
 				break application;
 			}
 			
