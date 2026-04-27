@@ -27,32 +27,25 @@ public class Seminar {
 			this.phoneNumber = phoneNumber;
 		}
 		
+		// 배열에 남은 자리가있는지 확인
 		public static boolean isArrayFull(Applicant[] applicants) {
-			boolean isArrayFull = true;
 			for(int i = 0; i<applicants.length; i++) {
 				if(applicants[i] == null) {
-					isArrayFull = false;
-					break;
+					return false;
 				}
-			}if(isArrayFull) { 
-				return true;
-			}else {
-				return false;
-			}
-		}// 배열에 남은 자리가있는지 확인한다
+			}return true;
+		}
 		
+		// 배열의 중복 확인
 		public static int findDuplicate(Applicant[] applicants,String name, int phoneNumber) {
 			for (int i = 0; i < applicants.length; i++) {
-				if(applicants[i] == null) {
-					continue;
-				}
 				if(applicants[i] != null && (applicants[i].name.equals(name) && applicants[i].phoneNumber == phoneNumber)) {
 					return i;
 				}
 			}return -1;	
 		}
-	}// 배열의 중복을 확인한다
-	
+	}
+	// 신청자 목록 출력
 	public static void showApplicantsInfo(Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
 		boolean isArrayEmpty = true;
 		for(int i = 0; i < seminarApplicants.length; i++) {
@@ -61,33 +54,35 @@ public class Seminar {
 				isArrayEmpty = false;
 			}
 		}if(isArrayEmpty) {
-			System.out.println("세미나 신청자가 없습니다");
+			System.out.println("[세미나 신청자가 없습니다]");
 		}
-		isArrayEmpty = true;
 		// 변수 재사용을 위해 값 초기화
+		isArrayEmpty = true;
 		for(int i = 0; i < standByApplicants.length; i++) {
 			if(standByApplicants[i] != null) {
 				System.out.println("대기신청자   | 이름: [" + standByApplicants[i].name + "] | 연락처: [" + standByApplicants[i].phoneNumber + "]");
 				isArrayEmpty = false;
 			}
 		}if(isArrayEmpty) {
-			System.out.println("대기신청자가 없습니다");
+			System.out.println("[대기신청자가 없습니다]");
 		}
 	}
 	
 	public static void showSeminarInfo(Seminar seminar, Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
+		// 세미나신청 인원 수
 		int seminarApplicantsNum = 0; 
 		for(int i = 0; i<seminarApplicants.length; i++) {
 			if(seminarApplicants[i] != null) {
 				seminarApplicantsNum++;
 			}
-		}// 세미나신청 인원
+		}
+		// 대기신청 인원 수
 		int standByApplicantsNum = 0;
 		for(int i = 0; i<standByApplicants.length; i++) {
 			if(standByApplicants[i] != null) {
 				standByApplicantsNum++;
 			}
-		} // 대기신청 인원
+		} 
 		System.out.println("세미나 이름: [" + seminar.getNameOfSeminar() + "]" );
 		System.out.println("정원: " + seminar.getCapcityOfPeople() + "명");
 		System.out.println("전체 신청자 수: " + (seminarApplicantsNum + standByApplicantsNum) + "명");
