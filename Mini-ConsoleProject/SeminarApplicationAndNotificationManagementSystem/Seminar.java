@@ -26,7 +26,7 @@ public class Seminar {
 			this.name = name;
 			this.phoneNumber = phoneNumber;
 		}
-		
+	}
 		// 배열에 남은 자리가있는지 확인
 		public static boolean isArrayFull(Applicant[] applicants) {
 			for(int i = 0; i<applicants.length; i++) {
@@ -34,6 +34,15 @@ public class Seminar {
 					return false;
 				}
 			}return true;
+		}
+		
+		// 배열에 저장된 정보가있는지 확인
+		public static boolean hasStandBy(Applicant[] applicants) {
+			for(int i=0; i<applicants.length; i++) {
+				if(applicants[i] != null) {
+					return true;
+				}
+			}return false;
 		}
 		
 		// 배열의 중복 확인
@@ -44,7 +53,7 @@ public class Seminar {
 				}
 			}return -1;	
 		}
-	}
+	
 	// 신청자 목록 출력
 	public static void showApplicantsInfo(Seminar.Applicant seminarApplicants[], Seminar.Applicant standByApplicants[]) {
 		boolean isArrayEmpty = true;
