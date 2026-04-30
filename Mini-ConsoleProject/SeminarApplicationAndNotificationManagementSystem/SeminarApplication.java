@@ -8,7 +8,7 @@ public class SeminarApplication {
 		Scanner sc = new Scanner(System.in);
 		String menu = "신청,신청 취소,신청자 목록,정보 출력,종료";
 		String[] menuArray = menu.split(","); 
-		Seminar seminar = new Seminar("취업박람회 세미나", 50);
+		Seminar seminar = new Seminar("취업박람회 세미나",3);
 		Seminar.Applicant[] seminarApplicants = new Seminar.Applicant[seminar.getCapcityOfPeople()];
 		Seminar.Applicant[] standByApplicants = new Seminar.Applicant[seminar.getCapcityOfPeople()];
 		
@@ -41,8 +41,9 @@ public class SeminarApplication {
 				System.out.print("연락처: ");
 				int phoneNumber = Integer.parseInt(sc.nextLine());
 				// 중복검사
-				int findDuplicate = Seminar.findDuplicate(seminarApplicants, name, phoneNumber);
-				if(findDuplicate != -1) {
+				int findSeminarDuplicate = Seminar.findDuplicate(seminarApplicants, name, phoneNumber);
+				int findStandByDuplicate = Seminar.findDuplicate(standByApplicants, name, phoneNumber);
+				if(findSeminarDuplicate != -1 || findStandByDuplicate != -1) {
 					System.out.println("[신청자 정보와 중복됩니다]");
 					continue;
 				}
@@ -57,7 +58,7 @@ public class SeminarApplication {
 					}
 				}
 				// 세미나 정원 초과일때
-				if(!isSeminarFull) {
+				if(isSeminarFull) {
 					for(int i = 0; i<standByApplicants.length; i++) {
 						if(standByApplicants[i] == null) {
 							standByApplicants[i] = seminar.new Applicant(name, phoneNumber);
@@ -105,12 +106,11 @@ public class SeminarApplication {
 				// 세미나 신청자일 경우
 				if(choosenNum == 1) {
 					// 중복검사
-					int foundIndex = Seminar.findDuplicate(seminarApplicants, name, phoneNumber);
+					int foundIndex = Seminar.findDuplicate(standByApplicants, name, phoneNumber);
 					if(foundIndex == -1) {
 						System.out.println("[일치하는 회원이 없습니다]");
 						continue;
-					// 중복검사 통과시
-					}else {
+					}
 						boolean hasStandBy = Seminar.hasStandBy(standByApplicants);
 						//대기신청자가 존재하지않을 경우
 						if(!hasStandBy) {
@@ -122,7 +122,7 @@ public class SeminarApplication {
 									seminarApplicants[foundIndex] = seminar.new Applicant(standByApplicants[i].name, standByApplicants[i].phoneNumber);
 									standByApplicants[i] = null;
 									break;
-								}
+								
 							}
 						}
 					}
@@ -132,12 +132,12 @@ public class SeminarApplication {
 					int foundIndex = Seminar.findDuplicate(standByApplicants, name, phoneNumber);
 					if(foundIndex != -1) {
 						standByApplicants[foundIndex] = null;
-						
 					}
 				}
 			
 				System.out.println("[신청이 취소되었습니다]");
-			}
+				}
+			
 						/**
 						for(int i = 0; i < standByApplicants.length; i++) {
 							if(standByApplicants[i] != null) {
@@ -176,5 +176,4 @@ public class SeminarApplication {
 		}
 		sc.close();
 	}
-
 }

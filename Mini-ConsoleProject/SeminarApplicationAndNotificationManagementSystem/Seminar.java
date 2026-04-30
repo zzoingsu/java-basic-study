@@ -20,7 +20,6 @@ public class Seminar {
 	public class Applicant {
 		String name;
 		int phoneNumber;
-		String status;
 		
 		Applicant(String name, int phoneNumber) {
 			this.name = name;
