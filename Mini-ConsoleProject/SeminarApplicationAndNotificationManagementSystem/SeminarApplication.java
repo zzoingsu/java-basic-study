@@ -9,8 +9,8 @@ public class SeminarApplication {
 		String menu = "신청,신청 취소,신청자 목록,정보 출력,종료";
 		String[] menuArray = menu.split(","); 
 		Seminar seminar = new Seminar("취업박람회 세미나",3);
-		Seminar.Applicant[] seminarApplicants = new Seminar.Applicant[seminar.getCapcityOfPeople()];
-		Seminar.Applicant[] standByApplicants = new Seminar.Applicant[seminar.getCapcityOfPeople()];
+		Seminar.Applicant[] seminarApplicants = new Seminar.Applicant[seminar.getCapacityOfPeople()];
+		Seminar.Applicant[] standByApplicants = new Seminar.Applicant[seminar.getCapacityOfPeople()];
 		
 		application : while(true) {
 			System.out.println();
@@ -39,7 +39,7 @@ public class SeminarApplication {
 				System.out.print("이름: ");
 				String name = sc.nextLine();
 				System.out.print("연락처: ");
-				int phoneNumber = Integer.parseInt(sc.nextLine());
+				String phoneNumber = sc.nextLine();
 				// 중복검사
 				int findSeminarDuplicate = Seminar.findDuplicate(seminarApplicants, name, phoneNumber);
 				int findStandByDuplicate = Seminar.findDuplicate(standByApplicants, name, phoneNumber);
@@ -99,10 +99,14 @@ public class SeminarApplication {
 				System.out.println("[1. 세미나 신청자 | 2. 대기신청자 ]");
 				System.out.print("선택 >");
 				int choosenNum = Integer.parseInt(sc.nextLine());
+				if(choosenNum <= 0 || choosenNum >= 3) {
+					System.out.println("[잘못된 입력입니다]");
+					continue;
+				}
 				System.out.print("이름: ");
 				String name = sc.nextLine();
 				System.out.print("연락처: ");
-				int phoneNumber = Integer.parseInt(sc.nextLine());
+				String phoneNumber = sc.nextLine();
 				// 세미나 신청자일 경우
 				if(choosenNum == 1) {
 					// 중복검사
@@ -115,12 +119,14 @@ public class SeminarApplication {
 						//대기신청자가 존재하지않을 경우
 						if(!hasStandBy) {
 							seminarApplicants[foundIndex] = null;
+							Seminar.shift(seminarApplicants, foundIndex);
 						//대기신청자가 존재할 경우
 						}else {
 							for(int i=0; i<standByApplicants.length; i++) {
 								if(standByApplicants[i] != null) {
-									seminarApplicants[foundIndex] = seminar.new Applicant(standByApplicants[i].name, standByApplicants[i].phoneNumber);
+									seminarApplicants[foundIndex] = seminar.new Applicant(standByApplicants[i].getName(), standByApplicants[i].getPhoneNumber());
 									standByApplicants[i] = null;
+									Seminar.shift(standByApplicants, i);
 									break;
 								
 							}
@@ -137,6 +143,7 @@ public class SeminarApplication {
 				        continue;
 				    }
 						standByApplicants[foundIndex] = null;
+						Seminar.shift(standByApplicants, foundIndex);
 					System.out.println("[신청이 취소되었습니다]");
 				}
 				}
