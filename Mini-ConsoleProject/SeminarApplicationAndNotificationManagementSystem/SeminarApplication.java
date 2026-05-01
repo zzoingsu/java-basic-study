@@ -106,7 +106,7 @@ public class SeminarApplication {
 				// 세미나 신청자일 경우
 				if(choosenNum == 1) {
 					// 중복검사
-					int foundIndex = Seminar.findDuplicate(standByApplicants, name, phoneNumber);
+					int foundIndex = Seminar.findDuplicate(seminarApplicants, name, phoneNumber);
 					if(foundIndex == -1) {
 						System.out.println("[일치하는 회원이 없습니다]");
 						continue;
@@ -126,16 +126,19 @@ public class SeminarApplication {
 							}
 						}
 					}
+					System.out.println("[신청이 취소되었습니다]");
+				}
 					// 대기신청자일 경우
-				}if(choosenNum == 2) {
+				if(choosenNum == 2) {
 					// 중복검사
 					int foundIndex = Seminar.findDuplicate(standByApplicants, name, phoneNumber);
-					if(foundIndex != -1) {
+					if(foundIndex == -1) {
+				        System.out.println("[일치하는 회원이 없습니다]");
+				        continue;
+				    }
 						standByApplicants[foundIndex] = null;
-					}
+					System.out.println("[신청이 취소되었습니다]");
 				}
-			
-				System.out.println("[신청이 취소되었습니다]");
 				}
 			
 						/**
