@@ -1,4 +1,4 @@
-package ch12.java.baseModule02_ScorePrinter;
+package ch12.javaBaseModule02_ScorePrinter;
 
 public class Score {
 	public static void main(String[] args) {

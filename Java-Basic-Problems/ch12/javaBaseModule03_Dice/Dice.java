@@ -1,4 +1,4 @@
-package ch12.java.baseModule03_Dice;
+package ch12.javaBaseModule03_Dice;
 
 public class Dice {
 

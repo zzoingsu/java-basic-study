@@ -1,4 +1,4 @@
-package ch12.java.baseModule01_Member;
+package ch12.javaBaseModule01_Member;
 
 public class Member {
 	private String id;
