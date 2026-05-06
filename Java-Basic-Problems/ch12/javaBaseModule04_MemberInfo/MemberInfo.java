@@ -9,7 +9,7 @@ public class MemberInfo {
 		for (int i=0; i<array.length; i++) {
 			String[] dataInfo = array[i].split(":");
 			String id = dataInfo[0];
-			String name  = 
+			String name = dataInfo[1];
 			int score = Integer.parseInt(dataInfo[2]);
 			System.out.println(score);
 			member = new Member(dataInfo[0], dataInfo[1], score);

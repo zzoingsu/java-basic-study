@@ -1,4 +1,4 @@
-package ch12.sec06.exam01;
+package ch12.sec06;
 
 public class BoxingUnBoxingExample {
 

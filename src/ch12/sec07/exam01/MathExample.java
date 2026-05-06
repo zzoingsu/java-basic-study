@@ -1,4 +1,4 @@
-package ch12.sec06.exam02;
+package ch12.sec07.exam01;
 
 public class MathExample {
 
