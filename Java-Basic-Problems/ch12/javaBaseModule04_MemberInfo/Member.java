@@ -6,34 +6,23 @@ public class Member {
 	private int score;
 	private String grade;
 	
-	public Member(String id, String name, int score, String grade) {
+	public Member(String id, String name, int score) {
 		this.id = id;
 		this.name = name;
 		this.score = score;
-	}
-	
-	public String getId() {
-		return id;
-	}
-	
-	public String getName() {
-		return name;
+		this.grade = gradeScope(score);
 	}
 	
 	public int getScore() {
 		return score;
 	}
 	
-	public String getGrade() {
-		return grade;
-	}
-	
-	public String gradeScope(int score) {
-			if(score > 90) {
+	private String gradeScope(int score) {
+			if(score >= 90) {
 				return "A";
-			}else if(score > 80) {
+			}else if(score >= 80) {
 				return "B";
-			}else if(score > 70) {
+			}else if(score >= 70) {
 				return "C";
 			}else {
 				return "D";
