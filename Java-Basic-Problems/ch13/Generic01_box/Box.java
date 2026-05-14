@@ -1,0 +1,21 @@
+package ch13.Generic01_box;
+
+public class Box <T> {
+	private T value;
+	
+	public void set(T value) {
+		this.value = value;
+	}
+	
+	public T get() {
+		return value;
+	}
+	
+	public boolean isEmpty() {
+		return value == null;
+	}
+	
+	public void clear() {
+		this.value = null;
+	}
+}
