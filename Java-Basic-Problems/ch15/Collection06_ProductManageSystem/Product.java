@@ -11,6 +11,19 @@ public class Product {
 		this.stock = stock;
 	}
 	
+	public int getStock() {
+		return stock;
+	}
+	
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	@Override
 	public String toString() {
 		return ", 상품명: " + name + ", 가격: " + price + ", 재고: " + stock;
 	}

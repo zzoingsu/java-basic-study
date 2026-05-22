@@ -15,8 +15,6 @@ public class ScoreExample {
 		scores.put("이코딩", 77);
 		scores.put("박테스트", 100);
 		
-		
-		
 		String key = "김자바";
 		Integer value = scores.get(key);
 		System.out.println("김자바의 점수: " + value);
