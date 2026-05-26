@@ -17,7 +17,7 @@ public class Seminar <T extends Person> {
 			System.out.println("중복된 전화번호 입니다");
 			} 
 		if(applicants != null && applicants[i].getPhoneNumber() != phoneNumber) {
-				applicants[i] = new T(name, phoneNumber);
+				
 			}
 		}
 	}
