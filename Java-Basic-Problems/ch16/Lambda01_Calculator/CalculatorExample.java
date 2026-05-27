@@ -1,4 +1,4 @@
-package ch16.Lamdar01_Calculator;
+package ch16.Lambda01_Calculator;
 
 public class CalculatorExample {
 
