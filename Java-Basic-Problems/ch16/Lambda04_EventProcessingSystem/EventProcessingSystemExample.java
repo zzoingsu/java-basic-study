@@ -12,6 +12,15 @@ public class EventProcessingSystemExample {
 			    new Event("ERROR", "최영희", "결제 승인 실패", 3),
 			    new Event("SIGNUP", "오민재", "신규 회원가입", 1)
 		};
+		
+		Event[] loginEvent = new Event[events.length];
+		int count = 0;
+		for(int i=0; i<events.length; i++) {
+			if(events[i].getEventType().equals("LOGIN")) {
+				loginEvent[count] = events[i];
+				count++;
+			}
+		}
 		EventProcesser eventProcesser = new EventProcesser();
 		eventProcesser.registerHandler(events, event -> {
 			return "";
