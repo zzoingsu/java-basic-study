@@ -9,6 +9,7 @@ public class SeminarApplication {
 		String menu = "신청,신청 취소,신청자 목록,정보 출력,종료";
 		String[] menuArray = menu.split(","); 
 		Seminar seminar = new Seminar("취업박람회 세미나",3);
+		SeminarRegister seminarRegister = new SeminarRegister();
 		Seminar.Applicant[] seminarApplicants = new Seminar.Applicant[seminar.getCapacityOfPeople()];
 		Seminar.Applicant[] standByApplicants = new Seminar.Applicant[seminar.getCapacityOfPeople()];
 		
@@ -28,8 +29,8 @@ public class SeminarApplication {
 			switch (menuNum) {
 			
 			case 1 -> {// 각각의 배열에 빈자리가있는지 확인
-				boolean isSeminarFull = Seminar.isArrayFull(seminarApplicants);
-				boolean isStandByFull = Seminar.isArrayFull(standByApplicants);
+				boolean isSeminarFull = seminarRegister.isFull(seminarApplicants);
+				boolean isStandByFull = seminarRegister.isFull(standByApplicants);
 				
 				// 모든 배열에 빈자리가 없을떄 
 				if(isSeminarFull && isStandByFull) {
@@ -41,8 +42,8 @@ public class SeminarApplication {
 				System.out.print("연락처: ");
 				String phoneNumber = sc.nextLine();
 				// 중복검사
-				int findSeminarDuplicate = Seminar.findDuplicate(seminarApplicants, name, phoneNumber);
-				int findStandByDuplicate = Seminar.findDuplicate(standByApplicants, name, phoneNumber);
+				int findSeminarDuplicate = seminarRegister.findDuplicate(seminarApplicants, name, phoneNumber);
+				int findStandByDuplicate = seminarRegister.findDuplicate(standByApplicants, name, phoneNumber);
 				if(findSeminarDuplicate != -1 || findStandByDuplicate != -1) {
 					System.out.println("[신청자 정보와 중복됩니다]");
 					continue;
@@ -110,12 +111,12 @@ public class SeminarApplication {
 				// 세미나 신청자일 경우
 				if(choosenNum == 1) {
 					// 중복검사
-					int foundIndex = Seminar.findDuplicate(seminarApplicants, name, phoneNumber);
+					int foundIndex = seminarRegister.findDuplicate(seminarApplicants, name, phoneNumber);
 					if(foundIndex == -1) {
 						System.out.println("[일치하는 회원이 없습니다]");
 						continue;
 					}
-						boolean hasStandBy = Seminar.hasStandBy(standByApplicants);
+						boolean hasStandBy = seminarRegister.hasStandBy(standByApplicants);
 						//대기신청자가 존재하지않을 경우
 						if(!hasStandBy) {
 							seminarApplicants[foundIndex] = null;
@@ -137,7 +138,7 @@ public class SeminarApplication {
 					// 대기신청자일 경우
 				if(choosenNum == 2) {
 					// 중복검사
-					int foundIndex = Seminar.findDuplicate(standByApplicants, name, phoneNumber);
+					int foundIndex = seminarRegister.findDuplicate(standByApplicants, name, phoneNumber);
 					if(foundIndex == -1) {
 				        System.out.println("[일치하는 회원이 없습니다]");
 				        continue;
