@@ -25,9 +25,9 @@ public class MemberObjectSerializable {
 		FileInputStream fis = new FileInputStream("/Users/zzoingsu/temp/test/member.dat");
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		
-		System.out.println((Member) ois.readObject());
-		System.out.println((Member) ois.readObject());
-		System.out.println((Member) ois.readObject());
+		for(int i=0; i<3; i++) {
+			System.out.println((Member) ois.readObject());
+		}
 		
 		ois.close();
 		
