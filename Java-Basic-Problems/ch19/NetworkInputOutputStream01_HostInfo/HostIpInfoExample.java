@@ -10,7 +10,7 @@ public class HostIpInfoExample {
 		try {
 			InetAddress ias = InetAddress.getLocalHost();
 			System.out.println("호스트 이름: " + ias.getHostName());
-			System.out.println("IP 주소" + ias.getHostAddress());
+			System.out.println("IP 주소: " + ias.getHostAddress());
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
