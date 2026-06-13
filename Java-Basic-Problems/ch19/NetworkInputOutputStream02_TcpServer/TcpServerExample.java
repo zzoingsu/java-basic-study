@@ -6,9 +6,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class TcpServerExample {
+	public static ServerSocket serverSocket = null; 
 
 	public static void main(String[] args) {
-		
+		startServer();
+		stopServer();
 		
 	}
 	public static void startServer() {
@@ -16,7 +18,7 @@ public class TcpServerExample {
 			@Override
 			public void run() {
 				try {
-					ServerSocket serverSocket = new ServerSocket(50001);
+					serverSocket = new ServerSocket(50001);
 					System.out.println("[서버 시작]");
 					
 					while(true) {
@@ -36,6 +38,14 @@ public class TcpServerExample {
 			}
 		};
 		thread.start();
+	}
+	
+	public static void stopServer() {
+		try {
+			serverSocket.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		}
 	}
 
 }

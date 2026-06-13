@@ -1,4 +1,4 @@
-package ch19.sec2;
+package ch19.sec02;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

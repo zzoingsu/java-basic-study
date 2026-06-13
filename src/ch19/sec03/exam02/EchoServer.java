@@ -1,12 +1,16 @@
-package ch19.sec3.exam01;
+package ch19.sec03.exam02;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ServerExample {
+
+
+public class EchoServer {
 	private static ServerSocket serverSocket = null;
 	
 	public static void main(String[] args) {
@@ -23,31 +27,40 @@ public class ServerExample {
 				break;
 			}
 		}
-		sc.close();
-		
 		stopServer();
+		sc.close();
 	}
-	
 	public static void startServer() {
 		Thread thread = new Thread() {
-			@Override
+			@Override()
 			public void run() {
 				try {
 					serverSocket = new ServerSocket(50001);
 					System.out.println("[서버] 시작됨");
 					
 					while(true) {
-						System.out.println("\n[서버] 연결 요청을 기다림");
-						Socket socket = serverSocket.accept();
+						System.out.println("\n[서버] 연결 요청을 기다림\n");
 						
+						Socket socket = serverSocket.accept();
 						InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress();
-						System.out.println("[서버] " + isa.getHostString() + "과의 연결 요청을 수락함");
+						System.out.println("[서버] " + isa.getHostString() + "의 연결 요청을 수락함");
+						
+						DataInputStream dis = new DataInputStream(socket.getInputStream());
+						String message = dis.readUTF();
+						
+						DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+						dos.writeUTF(message);
+						dos.flush();
+						System.out.println("[서버] 받은 데이터를 다시 보냄: " + message);
 						
 						socket.close();
-						System.out.println("[서버] " + isa.getHostString() + "과의 연결 요청을 끊음");
+						System.out.println("[서버] " + isa.getHostString() + "의 연결을 끊음");
 					}
-				}catch (IOException e) {
-					System.out.println("[서버] " + e.getMessage());
+				} catch(IOException e) {
+					if(serverSocket != null && serverSocket.isClosed()) {
+					} else {
+						e.printStackTrace();	
+					}
 				}
 			}
 		};
@@ -57,10 +70,9 @@ public class ServerExample {
 	public static void stopServer() {
 		try {
 			serverSocket.close();
-			System.out.println("[서버] 종료됨");
-		} catch(IOException e) {
+			System.out.println("[서버] 종료됨 ");
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 }

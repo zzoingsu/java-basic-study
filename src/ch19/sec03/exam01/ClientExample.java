@@ -1,4 +1,4 @@
-package ch19.sec3.exam01;
+package ch19.sec03.exam01;
 
 import java.io.IOException;
 import java.net.Socket;

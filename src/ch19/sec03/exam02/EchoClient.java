@@ -1,4 +1,4 @@
-package ch19.sec3.exam02;
+package ch19.sec03.exam02;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

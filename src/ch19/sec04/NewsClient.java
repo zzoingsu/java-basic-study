@@ -1,4 +1,4 @@
-package ch19.sec4;
+package ch19.sec04;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
