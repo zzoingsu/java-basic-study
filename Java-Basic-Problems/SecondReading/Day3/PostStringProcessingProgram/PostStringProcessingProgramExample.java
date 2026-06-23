@@ -15,3 +15,28 @@ public class PostStringProcessingProgramExample {
 	}
 
 }
+class Solution {
+    public String[] solution(String[] record) {
+        for (int i=0; i<record.length; i++) {
+        	Log log = new Log(record[i].split(" ")[0], record[i].split(" ")[1], record[i].split(" ")[2]);
+            System.out.println(record[i].split(" ")+ "\n");
+        }
+        String[] answer = {};
+        return answer;
+    }
+}
+class Log{
+    private String accessRecord;
+    private String userId;
+    private String userName;
+    
+    public Log(String accessRecord, String userId, String userName) {
+        this.accessRecord = accessRecord;
+        this.userId = userId;
+        this.userName = userName;
+    }
+    @Override
+    public String toString() {
+        return  userName + "님이 들어왔습니다.";
+    }
+}
