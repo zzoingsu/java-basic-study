@@ -19,7 +19,9 @@ public class User {
 	public int getAge() {
 		return age;
 	}
+	@Override
 	public String toString() {
 		return "회원아이디: " + userId + ", 회원 이름: " + name + ", 회원 나이: " + age;
 	}
+	
 }
