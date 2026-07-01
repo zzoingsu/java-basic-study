@@ -53,4 +53,5 @@ public class Account {
 			throw new IllegalArgumentException("금액은 음수일 수 없습니다");
 		}
 	}
+	
 }
