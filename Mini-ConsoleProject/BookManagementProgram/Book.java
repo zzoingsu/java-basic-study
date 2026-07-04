@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 public class Book {
-	private int book_Id;
+	private int bookId;
 	private String title;
 	private String author;
 	private int price;
-	private Date created_At;
+	private Date createdAt;
 
 }
