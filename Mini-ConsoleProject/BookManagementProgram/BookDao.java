@@ -20,7 +20,7 @@ public class BookDao {
 				.append("FROM books ")
 				.append("ORDER BY book_id DESC")
 				.toString();
-		try ( PreparedStatement pstmt = conn.prepareStatement(sql);
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);
 			  ResultSet rs = pstmt.executeQuery()) {
 			while(rs.next()) {
 				Book book = new Book();

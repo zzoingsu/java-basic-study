@@ -9,6 +9,7 @@ public class BookExample {
 	Scanner sc = new Scanner(System.in);
 	private Connection conn;
 	private BookDao bookDao;
+	private BookService bookService;
 	
 	public static void main(String[] args) {
 		BookExample bookExample = new BookExample();
@@ -24,6 +25,7 @@ public class BookExample {
 					"1234"
 					);
 			bookDao = new BookDao(conn);
+			bookService = new BookService(bookDao);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -45,7 +47,7 @@ public class BookExample {
 						book.getCreatedAt(),
 						book.getTitle()
 								);
-			}
+				}
 			mainMenu();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,8 +85,8 @@ public class BookExample {
 			book.setAuthor(author);
 			book.setPrice(price);
 			try {
-				bookDao.insert(book);	
-			} catch(Exception e) {
+				bookService.create(book);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -144,7 +146,7 @@ public class BookExample {
 		String menuNo = sc.nextLine();
 		if(menuNo.equals("1")) {
 			try {
-				bookDao.update(book);
+				bookService.update(book);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}	
@@ -157,7 +159,7 @@ public class BookExample {
 		Book book = new Book();
 		book.setBookId(book_id);
 		try {
-			bookDao.delete(book);
+			bookService.delete(book);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -171,7 +173,7 @@ public class BookExample {
 		String menuNo = sc.nextLine();
 		if(menuNo.equals("1")) {
 			try {
-				bookDao.clear();
+				bookService.clear();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
