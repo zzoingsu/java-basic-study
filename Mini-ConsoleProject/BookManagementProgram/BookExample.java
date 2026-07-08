@@ -32,6 +32,7 @@ public class BookExample {
 	}
 	
 	public void list() {
+		System.out.println();
 		System.out.println("[도서 목록]");
 		System.out.println("-------------------------------------------------------------");
 		System.out.printf("%-6s%-16s%-16s%-16s%-40s\n", "id", "author", "price ", "date" , "title");

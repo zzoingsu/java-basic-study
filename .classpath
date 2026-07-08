@@ -8,6 +8,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Java-Basic-Problems"/>
 	<classpathentry kind="src" path="Mini-ConsoleProject"/>
+	<classpathentry kind="src" path="CodingTest"/>
 	<classpathentry kind="lib" path="lib/json-20260522.jar"/>
 	<classpathentry kind="lib" path="/Users/zzoingsu/Downloads/ojdbc11-full/ojdbc11.jar"/>
 	<classpathentry kind="lib" path="/Users/zzoingsu/Downloads/lombok.jar"/>
