@@ -3,11 +3,12 @@ package BanknoteFolding;
 public class BanknoteFolding {
 	class Solution {
 	    public int solution(int[] wallet, int[] bill) {
-	    	if(!comparator(wallet, bill)) {
-	    		bill.
+	    	int count = 0;
+	    	while(!comparator(wallet, bill)) {
+	    		bill[findLong(bill)] /= 2;
+	    		count++;
 	    	}
-	        int answer = 0;
-	        return answer;
+	        return count;
 	    }
 	}
 	
@@ -17,6 +18,12 @@ public class BanknoteFolding {
 			return true;
 		}
 		return false;
+	}
+	public static int findLong(int[] bill) {
+		if(bill[0]>bill[1]) {
+			return 0;
+		}
+		return 1;
 	}
 
 }
