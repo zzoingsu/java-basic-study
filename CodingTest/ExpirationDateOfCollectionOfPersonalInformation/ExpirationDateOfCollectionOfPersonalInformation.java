@@ -30,8 +30,9 @@ public class ExpirationDateOfCollectionOfPersonalInformation {
 	    		for(int j=0; j<terms.length; j++) {
 	    			if(privacies[i].charAt(11) == terms[j].charAt(0)) {
 	    				int totalDays = date(privacies[i]);
-	    				int date = terms[j].charAt(1)*28;
-	    				int expireDay = totalDays + date;
+	    				String[] term = terms[j].split(" ");
+	    				int termMonth = Integer.parseInt(term[1]);
+	    				int expireDay = totalDays + termMonth * 28;
 		        		expireDate.add(expireDay);
 		        	}
 	    		}
@@ -40,7 +41,7 @@ public class ExpirationDateOfCollectionOfPersonalInformation {
 	    
 	    public static int date(String date) {
 	    	String data = date.substring(0, 10);
-	    	String[] dateArray = data.split(".");
+	    	String[] dateArray = data.split("\\.");
 	    	int year = Integer.parseInt(dateArray[0]);
 	    	int month = Integer.parseInt(dateArray[1]);
 	    	int day = Integer.parseInt(dateArray[2]);
