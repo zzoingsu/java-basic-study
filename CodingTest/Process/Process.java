@@ -5,25 +5,36 @@ import java.util.stream.Collectors;
 
 public class Process {
 	class Solution {
+		class Value {
+			private int priorities;
+			private int location;
+			
+			public Value(int priorties, int location) {
+				this.priorities = priorties;
+				this.location = location;
+			}
+			@Override
+			public String toString() {
+				return priorities + "" + location;
+			}
+		}
 	    public int solution(int[] priorities, int location) {
-	    	Queue<Integer> q = Arrays.stream(priorities)
-	    			.boxed()
-	    			.collect(Collectors.toCollection(LinkedList::new));
-	    	int count=0;
-	    	for(int i=0; i<q.size(); i++) {
-	    		if(q.peek() == findMax(q)) {
-	    			count++;
-	    			q.poll();
-	    		}
-	    		int value = q.poll();
-	    		q.add(value);
+	    	int result;
+	    	Queue<Value> queue = new LinkedList<>();
+	    	for(int i=0; i<priorities.length; i++) {
+	    		queue.add(new Value(priorities[i], i));
 	    	}
-	    	
-	        return count;
+	    	while(true) {
+	    		if(queue.peek().priorities == findMax(queue) && queue.peek().location == location) {
+	    			result = queue.peek().location;
+	    			break;
+	    		}
+	    	}
+	        return result;
 	    }
-	    public static int findMax(Queue<Integer> q) {
-	    	int max = q.stream()
-	    	        .mapToInt(Integer::intValue)
+	    public static int findMax(Queue<Value> queue) {
+	    	int max = queue.stream()
+	    	        .mapToInt(value -> value.priorities)
 	    	        .max()
 	    	        .orElse(0);
 	    	return max;
