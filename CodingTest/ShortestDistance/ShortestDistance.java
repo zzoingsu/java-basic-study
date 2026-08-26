@@ -6,7 +6,8 @@ import java.util.Queue;
 public class ShortestDistance {
 	class Solution {
 	    public int solution(int[][] maps) {
-	    	return bfs(maps);
+	    	boolean[][] visited = new boolean[maps.length][maps[0].length];
+	    	return bfs(maps, visited);
 	    }
 	    public static int dfs(int[][]maps, int length, int width, boolean[][] visited,int count) {
 	    	int min=100000;
@@ -32,10 +33,11 @@ public class ShortestDistance {
 	    	int leftRight = Math.min(left, right);
 	    	return Math.min(upDown, leftRight);
 	    }
-	    public static int bfs(int[][] maps) {
+	    
+	    public static int bfs(int[][] maps, boolean[][] visited) {
 	    	Queue<int[]> queue = new LinkedList<>();
 	    	int count = 0;
-	    	queue.add(new int[] {0, 0});
+	    	queue.add(new int[] {0, 0, count});
 	    	while(!queue.isEmpty()) {
 	    		int[] location = queue.poll();
 	    		int length = location[0];
@@ -44,20 +46,28 @@ public class ShortestDistance {
 	    			return count;
 	    		}
 	    		if(length+1 < maps.length && maps[length+1][width] != 0) {
-	    			queue.add(new int[] {length+1, width});
-	    			count ++;
+	    			if(visited[length+1][width] != true) {
+	    				queue.add(new int[] {length+1, width, count+1});
+		    			visited[length+1][width] = true;
+	    			}
 	    		}
 	    		if(length-1>=0 && maps[length-1][width] != 0) {
-	    			queue.add(new int[] {length-1, width});
-	    			count ++;
+	    			if(visited[length-1][width] != true) {
+	    				queue.add(new int[] {length-1, width, count+1});
+		    			visited[length-1][width] = true;
+	    			}
 	    		}
 	    		if(width+1 < maps[0].length && maps[length][width+1] != 0) {
-	    			queue.add(new int[] {length, width+1});
-	    			count ++;
+	    			if(visited[length][width+1] != true) {
+	    				queue.add(new int[] {length, width+1, count+1});
+		    			visited[length][width+1] = true;
+	    			}
 	    		}
 	    		if(width > 0 && maps[length][width-1] != 0) {
-	    			queue.add(new int[] {length, width-1});
-	    			count ++;
+	    			if(visited[length][width-1] != true) {
+	    				queue.add(new int[] {length, width-1, count+1});
+		    			visited[length][width-1] = true;
+	    			}
 	    		}
 	    	}
 	    	return -1;
