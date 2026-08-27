@@ -36,12 +36,12 @@ public class ShortestDistance {
 	    
 	    public static int bfs(int[][] maps, boolean[][] visited) {
 	    	Queue<int[]> queue = new LinkedList<>();
-	    	int count = 0;
-	    	queue.add(new int[] {0, 0, count});
+	    	queue.add(new int[] {0, 0, 0});
 	    	while(!queue.isEmpty()) {
 	    		int[] location = queue.poll();
 	    		int length = location[0];
 	    		int width = location[1];
+	    		int count = location[2];
 	    		if(location[0] == maps.length-1 && location[1] == maps[0].length-1) {
 	    			return count;
 	    		}
