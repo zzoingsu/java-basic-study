@@ -45,6 +45,7 @@ public class DesertIsland {
 	    		int row = location[0];
 	    		int colum = location[1];
 	    		int count = location[2];
+	    		int root = 0; // 분기
 	    		
 	    		for(int[] moving : move) {
 	    			int newRow = row + moving[0];
@@ -53,14 +54,16 @@ public class DesertIsland {
 	    			if(newRow>0 && newColum>0 && newRow<maps.length && newColum<maps[0].length()) {
 	    				if(!visited[newRow][newColum]) {
 	    					if(maps[newRow].charAt(newColum) != 'X') {
-	    						island.add(new int[] {newRow, newColum, count+1});
+	    						if(root < 2) { // 분기가 진행이 되지않을 경우
+	    							island.add(new int[] {newRow, newColum, count + Character.getNumericValue(maps[newRow].charAt(newColum))});
+	    						}
+	    						island.add(new int[] {newRow, newColum, count});
 	    						visited[newRow][newColum] = true;
 	    						continue;
 	    					}
 	    				}
 	    			}
-	    			count++;
-	    			
+	    			++count;
 	    			if(count == 4) {
 	    				number.add(maps[newRow].charAt(newColum));
 	    			}
