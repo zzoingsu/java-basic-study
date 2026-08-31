@@ -25,11 +25,9 @@ public class DesertIsland {
 	    		int row = location[0];
 	    		int colum = location[1];
 	    		int count = location[2];
-	    		
 	    		for(int[] moving : find) {
 	    			int newRow = row + moving[0];
 	    			int newColum = colum + moving[1];
-	    			
 	    			if(newRow>0 && newColum>0 && newRow<maps.length && newColum<maps[0].length()) {
 	    				if(maps[newRow].charAt(newColum) != 'X' && !visited[newRow][newColum]) {
 	    					queue.add(new int[] {newRow, newColum, count});
@@ -39,24 +37,17 @@ public class DesertIsland {
 	    			}
 	    		}
 	    	}
-	    	
 	    	while(!island.isEmpty()) {
 	    		int[] location = island.poll();
 	    		int row = location[0];
 	    		int colum = location[1];
 	    		int count = location[2];
-	    		int root = 0; // 분기
-	    		
 	    		for(int[] moving : move) {
 	    			int newRow = row + moving[0];
 	    			int newColum = colum + moving[1];
-	    			
 	    			if(newRow>0 && newColum>0 && newRow<maps.length && newColum<maps[0].length()) {
 	    				if(!visited[newRow][newColum]) {
 	    					if(maps[newRow].charAt(newColum) != 'X') {
-	    						if(root < 2) { // 분기가 진행이 되지않을 경우
-	    							island.add(new int[] {newRow, newColum, count + Character.getNumericValue(maps[newRow].charAt(newColum))});
-	    						}
 	    						island.add(new int[] {newRow, newColum, count});
 	    						visited[newRow][newColum] = true;
 	    						continue;
@@ -72,5 +63,4 @@ public class DesertIsland {
 	    	return 0;
 	    }
 	}
-
 }
