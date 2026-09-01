@@ -1,15 +1,15 @@
 package desertIsland;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class DesertIsland {
 	class Solution {
-	    public int[] solution(String[] maps) {
+	    public List<Integer> solution(String[] maps) {
 	    	boolean[][] visited = new boolean[maps.length][maps[0].length()];
-	        int[] answer = {};
-	        return answer;
+	        return tour(maps, visited);
 	    }
 	    public static int bfsTest(String[] maps, boolean[][] visited) {
 	    	Queue<int[]> queue = new LinkedList<>();
@@ -62,17 +62,24 @@ public class DesertIsland {
 	    	}
 	    	return 0;
 	    }
-	    public static int tour(String[] maps, boolean[][] visited) {
+	    public static List<Integer> tour(String[] maps, boolean[][] visited) {
 	    	List<Integer> sum = new LinkedList<>();
+	    	int count = 0;
 	    	for(int row=0; row<maps.length; row++) {
 	    		for(int colum=0; colum<maps[0].length(); colum++) {
 	    			if(maps[row].charAt(colum) != 'X' && !visited[row][colum]) {
-	    				
+	    				sum.add(bfs(maps, visited, row, colum));
+	    			}
+	    			else {
+	    				count++;
 	    			}
 	    		}
 	    	}
-	    	return 0;
-	    	
+	    	if(count == maps.length * maps[0].length()) {
+	    		sum.add(-1);
+	    	}
+	    	Collections.sort(sum);
+	    	return sum;
 	    }
 	    public static int bfs(String[] maps, boolean[][] visited, int row, int colum) {
 	    	Queue<int[]> queue = new LinkedList<>();
@@ -97,14 +104,9 @@ public class DesertIsland {
 		    				queue.add(new int[] {newRow, newColum});
 		    				visited[newRow][newColum] = true;
 		    				sum += Character.getNumericValue(maps[newRow].charAt(newColum));
-		    			}else {
-		    				count-=1;
 		    			}
 		    		}
 		    	}
-	    		if(count == -4) {
-	    			return -1;
-	    		}
 	    	}
 	    	return sum;
 	    	
