@@ -103,6 +103,7 @@ public class DesertIsland {
 		    			if(maps[newRow].charAt(newColum) != 'X' && !visited[newRow][newColum]) {
 		    				queue.add(new int[] {newRow, newColum});
 		    				visited[newRow][newColum] = true;
+		    				 System.out.println(newRow + "/" + newColum);
 		    				sum += Character.getNumericValue(maps[newRow].charAt(newColum));
 		    			}
 		    		}
