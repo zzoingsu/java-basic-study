@@ -99,7 +99,7 @@ public class DesertIsland {
 	    		for(int[] moving : move) {
 		    		int newRow = row + moving[0];
 		    		int newColum = colum + moving[1];
-		    		if(newRow>0 && newColum>0 && newRow<maps.length && newColum<maps[0].length()) {
+		    		if(newRow>=0 && newColum>=0 && newRow<maps.length && newColum<maps[0].length()) {
 		    			if(maps[newRow].charAt(newColum) != 'X' && !visited[newRow][newColum]) {
 		    				queue.add(new int[] {newRow, newColum});
 		    				visited[newRow][newColum] = true;
