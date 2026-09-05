@@ -68,5 +68,24 @@ public class recursionExample {
 		return choose(numbers, target, index+1, sum+numbers[index])
 		+ choose(numbers, target, index+1, sum);
 	}
+	public int connected(int[][] connections, int start) {
+		boolean[] visited = new boolean[connections.length];
+		int count = 0;
+		for(int i=0; i<connections.length; i++) {
+			if(start == connections[i][0] && !visited[i]) {
+				int newNod = connections[i][0];
+				visited[i] = true;
+				count += 1;
+				count += connected(connections, newNod);
+			}
+			if(start == connections[i][1] && !visited[i]) {
+				int newNod = connections[i][1];
+				visited[i] = true;
+				count += 1;
+				count += connected(connections, newNod);
+			}
+		}
+		return count;
+	}
 
 }
