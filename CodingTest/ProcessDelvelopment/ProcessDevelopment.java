@@ -19,19 +19,24 @@ public class ProcessDevelopment {
 	    	}
 	    	while(!queue.isEmpty()) {
 	    		int progress = queue.poll() + days*speeds[index];
-	    		days += Math.ceil((100 - progress)/speeds[index]);
-	    		int result = findDone(queue, days, progresses, speeds, index+1);
+	    		days += Math.ceil((100 - progress)/(float)speeds[index]);
+	    		index+=1;
+	    		int result = findDone(queue, days, progresses, speeds, index);
 	    		index += result +1;
 	    		list.add(result +1);
 	    	}
 	    	return list.stream().mapToInt(Integer :: intValue).toArray();
 	    }
-	    public int findDone(Queue<Integer> queue, int days, int[] progrecesses, int[] speeds, int index) {
+	    public int findDone(Queue<Integer> queue, int days, int[] progresses, int[] speeds, int index) {
 	    	int count = 0;
-	    	if(queue.poll() + (days*speeds[index]) >=100) {
+	    	if(queue.isEmpty()) {
+	    		return count;
+	    	}
+	    	if(queue.peek() + (days*speeds[index]) >=100) {
+	    		queue.poll();
 	    		index += 1;
 	    		count+=1;
-	    		count += findDone(queue, days, progrecesses, speeds, index);
+	    		count += findDone(queue, days, progresses, speeds, index);
 	    	}
 	    	return count;
 	    }
