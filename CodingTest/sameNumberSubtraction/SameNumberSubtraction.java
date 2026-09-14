@@ -45,4 +45,29 @@ public class SameNumberSubtraction {
 		}
 		return result;
 	}
+	
+	public int solution3(int n, int[] lost, int[] reserve) {
+		Set<Integer> set = new HashSet<>();
+		int count = 0;
+		for(int student : lost) {
+			set.add(student);
+		}
+		
+		for(int i=0; i<reserve.length; i++) {
+			if(set.contains(reserve[i])) {
+				set.remove(reserve[i]);
+				count+=1;
+				continue;
+			}
+			if(set.contains(reserve[i]+1)) {
+				count+=1;
+				continue;
+			}
+			if(set.contains(reserve[i]-1)) {
+				count+=1;
+			}
+		}
+		int result = n - lost.length + count;
+        return result;
+    }
 }
