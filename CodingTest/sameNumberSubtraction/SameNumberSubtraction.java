@@ -46,8 +46,10 @@ public class SameNumberSubtraction {
 		return result;
 	}
 	
+
 	public int solution3(int n, int[] lost, int[] reserve) {
 		Set<Integer> set = new HashSet<>();
+		Arrays.sort(reserve);
 		int count = 0;
 		for(int student : lost) {
 			set.add(student);
@@ -56,18 +58,109 @@ public class SameNumberSubtraction {
 		for(int i=0; i<reserve.length; i++) {
 			if(set.contains(reserve[i])) {
 				set.remove(reserve[i]);
-				count+=1;
-				continue;
+                count++;
+                continue;
 			}
-			if(set.contains(reserve[i]+1)) {
-				count+=1;
-				continue;
-			}
+			
 			if(set.contains(reserve[i]-1)) {
+				set.remove(reserve[i-1]);
+				count+=1;
+			} else if(set.contains(reserve[i]+1)) {
+				set.remove(reserve[i+1]);
 				count+=1;
 			}
 		}
 		int result = n - lost.length + count;
         return result;
     }
+	
+	public int[] solution4(int[] array, int[][] commands) {
+		int[] result = new int[commands.length];
+		
+		for(int i=0; i<commands.length; i++) {
+			int[] command = commands[i];
+			int[] sliced = Arrays.copyOfRange(command, command[0], command[1]-1);
+			Arrays.sort(sliced);
+			result[i] = sliced[command[2]];
+		}
+        return result;
+    }
+	
+	public boolean solution5(String s) {
+		Stack<Integer> stack = new Stack<>();
+		boolean result = true;
+		for(int i=0; i<s.length(); i++) {
+			if(s.charAt(i) == '(') {
+				stack.push(1);
+			}else {
+				if(stack.isEmpty()) {
+					result = false;
+				}else {
+					stack.pop();
+				}
+			}
+		}
+    	return result;
+    }
+	
+	public int solution6(int[] priorities, int location) {
+		Queue<int[]> queue = new LinkedList<>();
+		PriorityQueue<Integer> pq =
+		        new PriorityQueue<>(Collections.reverseOrder());
+		int count = 0;
+		
+		for(int i=0; i<priorities.length; i++) {
+			queue.add(new int[]{priorities[i], i});
+			pq.add(priorities[i]);
+		}
+		
+		while(!queue.isEmpty()) {
+			int[] prioritiy = queue.poll();
+			if(prioritiy[0] == pq.peek()) {
+				pq.poll();
+				if(prioritiy[1] == location) {
+					return count++;
+				}
+				count++;
+			}else {
+				queue.add(prioritiy);
+			}
+		}
+		return count;
+	}
+	
+	public boolean solution7(String[] phone_book) {
+		Arrays.sort(phone_book);
+		boolean result = true;
+       
+       for(int i=0; i<phone_book.length; i++) {
+    	   if(i+1 == phone_book.length) {
+    		   continue;
+    	   }
+    	   if(phone_book[i+1].startsWith(phone_book[i])) {
+    		   result = false;
+    	   }
+       }
+        return result;
+    }
+	
+	public boolean solution8(String[] phone_book) {
+		boolean result = true;
+		Map<String, Integer> map = new HashMap<>();
+		
+		for(int i=0; i<phone_book.length; i++) {
+			map.put(phone_book[i], i);
+		}
+		
+		for(int i=0; i<phone_book.length; i++) {
+			for(int j=0; j<phone_book[i].length(); i++) {
+				if(map.containsKey(phone_book[i].substring(0, j))) {
+					result =  false;
+					return result;
+				}
+			}
+		}
+		
+		return result;
+	}
 }
