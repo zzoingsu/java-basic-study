@@ -153,7 +153,7 @@ public class SameNumberSubtraction {
 		}
 		
 		for(int i=0; i<phone_book.length; i++) {
-			for(int j=0; j<phone_book[i].length(); i++) {
+			for(int j=0; j<phone_book[i].length(); j++) {
 				if(map.containsKey(phone_book[i].substring(0, j))) {
 					result =  false;
 					return result;
@@ -163,4 +163,69 @@ public class SameNumberSubtraction {
 		
 		return result;
 	}
+	public int solution9(int[] peoples, int limit) {
+		LinkedList<Integer> list = new LinkedList<>();
+		int count = 0;
+		Arrays.sort(peoples);
+
+		for(int people : peoples) {
+			list.add(people);
+		}		
+		
+		while(!list.isEmpty()) {
+			if(list.size() == 1) {
+				count+=1;
+				continue;
+			}
+			if(limit-list.getLast()>=list.getFirst()) {
+				list.removeFirst();
+			}
+			list.removeLast();
+			count+=1;
+		}
+        return count;
+    }
+	
+	public int[] solution10(int brown, int yellow) {
+		int area = brown+yellow;
+		for(int i=3; i<area; i++) {
+			if(area%i == 0) {
+				int j=area/i;
+				
+				if((i-2) * (j-2) == yellow) {
+					return new int[]{i, j};
+				}
+			}
+		}
+        return new int[] {};
+    }
+	
+	public int[] solution11(int[] array, int[][] commands) {
+		int[] result = new int[] {commands.length};
+		
+		for(int i=0; i<commands.length; i++) {
+			int[] sliced = Arrays.copyOfRange(array, commands[i][0], commands[i][1]);
+			Arrays.sort(sliced);
+			result[i] = sliced[commands[i][2]];
+		}
+		return result;
+	}
+	
+	public boolean solution12(String[] phone_book) {
+		boolean result = true;
+		Map<String, Integer> map = new HashMap<>();
+		
+		for(int i=0; i<phone_book.length; i++) {
+			map.put(phone_book[i], i);
+		}
+		for(int i=0; i<phone_book.length; i++) {
+			for(int j=0; j<phone_book[i].length(); j++) {
+				if(map.containsKey(phone_book[i].substring(0, j))) {
+					result = false;
+				}
+			}
+		}
+		return result;
+	}
+	
 }
