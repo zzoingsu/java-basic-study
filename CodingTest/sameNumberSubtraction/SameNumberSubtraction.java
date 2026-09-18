@@ -44,8 +44,7 @@ public class SameNumberSubtraction {
 			}
 		}
 		return result;
-	}
-	
+	}	
 
 	public int solution3(int n, int[] lost, int[] reserve) {
 		Set<Integer> set = new HashSet<>();
@@ -228,4 +227,31 @@ public class SameNumberSubtraction {
 		return result;
 	}
 	
+	 public int solution13(int[] citations) {
+		 int maxNum = Arrays.stream(citations).max().getAsInt();
+		 int max = 0;
+		 int index = 0;
+		 for(int i=0; i<=maxNum; i++) {
+			 int count=0;
+			 for(int j=0; j<citations.length; j++) {
+				 if(citations[j] >= i) {
+					 count+=1;
+				 }
+			 }
+			if(count >= i) {
+				index = i;
+			}
+		 }
+	        return index; 
+	    }
+	
+	 public String solution(String s) {
+		 List<Integer> list = new LinkedList<>();
+		 String[] num = s.split(" ");
+		 for(int i=0; i<num.length; i++) {
+			 list.add(Integer.parseInt(num[i]));
+		 }
+		 list.sort(null);
+	     return list.getFirst().toString() + list.getLast().toString();
+	    }
 }
