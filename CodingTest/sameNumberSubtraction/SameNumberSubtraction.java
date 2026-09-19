@@ -245,13 +245,71 @@ public class SameNumberSubtraction {
 	        return index; 
 	    }
 	
-	 public String solution(String s) {
-		 List<Integer> list = new LinkedList<>();
+	 public String solution14(String s) {
+		 LinkedList<Integer> list = new LinkedList<>();
 		 String[] num = s.split(" ");
 		 for(int i=0; i<num.length; i++) {
 			 list.add(Integer.parseInt(num[i]));
 		 }
 		 list.sort(null);
 	     return list.getFirst().toString() + list.getLast().toString();
+	    }
+	 
+	 public String solution15(String s) {
+		 StringBuilder result = new StringBuilder();
+		 for(int i=0; i<s.length(); i++) {
+			 if(i == 0 || s.charAt(i-1) == ' ') {
+				 result.append(Character.toUpperCase(s.charAt(i)));
+			 }else {
+				 result.append(Character.toLowerCase(s.charAt(i)));
+			 }
+		 }
+		return result.toString();
+	 }
+	 public int[] solution16(int n, String[] words) {
+		 Set<String> set = new HashSet<>();
+		 int index = 0;
+		 for(int i=0; i<words.length; i++) {
+			 set.add(words[i]);
+			 if(i+1 == words.length) {
+				 if(words[i].length() == 1 || set.size() != i+1) {
+					 return new int[] {index/n, index%n};
+				 }
+				 continue;
+			 }
+			 if(words[i].length() != 1 && words[i].charAt(words[i].length()-1) == words[i+1].charAt(0) && set.size() == i+1) {
+			 } else {
+				 index = i;
+				 return new int[] {index/n, index%n};
+			 }
+		 }
+		 return new int[] {0, 0};
+	 }
+	 
+	 public int solution17(int k, int[] tangerine) {
+		 List<Integer> list = new LinkedList<>();
+		 int count = 1;
+		 int var = 0;
+		 int result = 0;
+		 Arrays.sort(tangerine);
+		 for(int i=0; i<tangerine.length; i++) {
+			 if(i+1 == tangerine.length) {
+				 list.add(count);
+			 }
+			 if(tangerine[i] == tangerine[i+1]) {
+				 count+=1;
+			 }else {
+				 list.add(count);
+				 count = 1;
+			 }
+		 }
+		 list.sort(Comparator.reverseOrder());
+			 for(int i=0; i<list.size(); i++) {
+				 var += list.get(i);
+				 if(var>=k) {
+					 result = i;
+				 }
+			 }
+	        return result;
 	    }
 }
