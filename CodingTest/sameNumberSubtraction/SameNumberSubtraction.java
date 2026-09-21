@@ -312,4 +312,45 @@ public class SameNumberSubtraction {
 			 }
 	        return result;
 	    }
+	 
+	 public int solution18(String[] want, int[] number, String[] discount) {
+		 Map<String, Integer> needs = new HashMap<>();
+		 int result = 0;
+		 for(int i=0; i<number.length; i++) {
+			 needs.put(want[i], number[i]);
+		 }
+		 for(int i=0; i<discount.length-10; i++) {
+			 Map<String, Integer> map = new HashMap<>();
+			 for(int j=i; j<i+10; j++) {
+				 map.put(discount[j], map.getOrDefault(discount[j], 0) +1);
+			 }
+			 if(needs.equals(map)) {
+				 result+=1;
+			 }
+		 }
+		 return result;
+	    }
+	 
+	 public int solution19(int[] scoville, int K) {
+		 PriorityQueue<Integer> queue = new PriorityQueue<>();
+		 int result = 0;
+		 for(int value : scoville) {
+			 queue.add(value);
+		 }
+		 
+		  while(!queue.isEmpty()) {
+			  if(queue.size() == 1 ) {
+				 if(queue.peek() < K) {
+					 return -1;
+				 }return result;
+			 }
+			 if(queue.peek() < K) {
+				 queue.add(queue.poll() + queue.poll()*2);
+				 result +=1;
+			 }else {
+				 return result;
+			 }
+		 }
+	     return result;
+	    }
 }
