@@ -353,4 +353,32 @@ public class SameNumberSubtraction {
 		 }
 	     return result;
 	    }
+	 
+	 public int solution20(int[][] maps) {
+		 Queue<int[]> queue = new LinkedList<>();
+		 int[][] moves = {{0,1},{0,-1},{1,0},{-1,0}};
+		 boolean[][] visited = new boolean[maps.length][maps[0].length];
+		 queue.add(new int[] {0,0,0});
+		 
+		 while(!queue.isEmpty()) {
+			 int[] value = queue.poll();
+			 int row = value[0];
+			 int colum = value[1];
+			 int count = 0;
+			 
+			 for(int[] move : moves) {
+				 int newRow = row + move[0];
+				 int newColum = colum + move[1];
+				 
+				 if(newRow == maps.length-1 && newColum == maps[0].length-1) {
+					 return count;
+				 }
+				 if(newRow>=0 && newRow<maps.length && newColum>=0 && newColum>=maps[0].length && !visited[newRow][newColum] && maps[newRow][newColum]!=0) {
+					 queue.add(new int[] {newRow, newColum, count+=1});
+					 visited[newRow][newColum] = true;
+				 }
+			 }
+		 }
+		 return -1;
+	 }
 }

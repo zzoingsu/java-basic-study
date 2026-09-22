@@ -15,5 +15,13 @@ public class TargetNumber {
 	    		recursion(numbers, target, index+1, sum-numbers[index]);
 	    }
 	}
+	
+	public int solution2 (int[] numbers, int target, int index, int sum) {
+		if(index == numbers.length) {
+			return sum == target? 1: 0;
+		}
+		return solution2(numbers, target, index+1, sum+numbers[index]) +
+				solution2(numbers, target, index+1, sum-numbers[index]);
+	}
 
 }
