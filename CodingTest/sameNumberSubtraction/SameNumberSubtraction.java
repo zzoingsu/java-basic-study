@@ -381,4 +381,21 @@ public class SameNumberSubtraction {
 		 }
 		 return -1;
 	 }
+	 
+	 public long solution21(int n, int[] times) {
+		 PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0]));
+		 int count = 0;
+		 
+		 for(int time : times) {
+			 queue.add(new int[] {time, time});
+		 }
+		
+		 while(count<n) {
+			 int[] temp = queue.poll();
+			 queue.add(new int[] {temp[0]+temp[1], temp[1]});
+			 count++;
+			 }
+		 
+		 return count;
+		 }
 }
