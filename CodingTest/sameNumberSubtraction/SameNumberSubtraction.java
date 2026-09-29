@@ -398,4 +398,31 @@ public class SameNumberSubtraction {
 		 
 		 return count;
 		 }
+	 
+	 public int solution22(int[] order) {
+		 Stack<Integer> stack = new Stack<>();
+		 Queue<Integer> queue = new LinkedList<>();
+		 int count = 0;
+		 
+		 for(int temp : order) {
+			 queue.add(temp);
+		 }
+		 
+		 for(int i=1; i<=order.length; i++) {
+			 if(i == queue.peek()) {
+				 queue.poll();
+				 count+=1;
+		
+					 while (!stack.isEmpty() && !queue.isEmpty() 
+                            && stack.peek().equals(queue.peek())) {
+						    stack.pop();
+						    queue.poll();
+						    count++;
+						}
+			 } else {
+                 stack.push(i);
+             }
+		 }
+		 return count;
+	 }
 }
