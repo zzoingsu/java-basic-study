@@ -425,4 +425,59 @@ public class SameNumberSubtraction {
 		 }
 		 return count;
 	 }
+	 
+	 public int[] solution23(int[] numbers) {
+		 int[] result = new int[numbers.length];
+		 Arrays.fill(result, -1);
+		 Stack<Integer> stack = new Stack<>();
+		 
+		 for(int i=0; i<numbers.length; i++) {
+			 while(!stack.isEmpty() && numbers[i] < numbers[stack.peek()]) {
+				 int index = stack.pop();
+				 result[index] = numbers[i];
+			 }
+			 stack.push(i);
+		 }
+		 return result;
+	 }
+	 
+	 public int[] solution24(int[] sequence, int k) {
+		    int[] result = new int[2];
+		    int minLength = Integer.MAX_VALUE;
+
+		    int start = 0;
+		    int end = 0;
+		    int sum = sequence[0];
+
+		    while (start < sequence.length && end < sequence.length) {
+
+		        if (sum < k) {
+		            end++;
+
+		            if (end == sequence.length) {
+		                break;
+		            }
+
+		            sum += sequence[end];
+
+		        } else if (sum > k) {
+		            sum -= sequence[start];
+		            start++;
+
+		        } else {
+		            int length = end - start + 1;
+
+		            if (length < minLength) {
+		                minLength = length;
+		                result[0] = start;
+		                result[1] = end;
+		            }
+
+		            sum -= sequence[start];
+		            start++;
+		        }
+		    }
+
+		    return result;
+		}
 }
