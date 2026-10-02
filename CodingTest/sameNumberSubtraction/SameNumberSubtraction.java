@@ -480,4 +480,42 @@ public class SameNumberSubtraction {
 
 		    return result;
 		}
+	 
+	 public int solution25(int[] queue1, int[] queue2) {
+		 Queue<Integer> newQueue1 = new LinkedList<>();
+		 Queue<Integer> newQueue2 = new LinkedList<>();
+		 int count = 0;
+		 int queue1Sum = 0;
+		 int queue2Sum = 0;
+		 int totalSum = queue1Sum + queue2Sum;
+		 
+		 for(int temp : queue1) {
+			 newQueue1.add(temp);
+			 queue1Sum += temp;
+		 }
+		 
+		 for(int temp : queue2) {
+			 newQueue2.add(temp);
+			 queue2Sum += temp;
+		 }
+		 
+		 while(newQueue1.stream().mapToInt(Integer :: intValue).toArray() != queue2) {
+			if(totalSum/2 < queue1Sum) {
+				int temp = newQueue1.poll();
+				newQueue2.add(temp);
+				queue1Sum -= temp;
+				queue2Sum += temp;
+				count+=1;
+			}else if( totalSum/2 > queue1Sum) {
+				int temp = newQueue2.poll();
+				newQueue1.add(temp);
+				queue1Sum += temp;
+				queue2Sum -= temp;
+				count+=1;
+			}else {
+				return count;
+			}
+		 }
+		 return -1;
+	 }
 }
