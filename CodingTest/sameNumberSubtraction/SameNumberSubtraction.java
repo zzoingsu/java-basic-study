@@ -518,4 +518,96 @@ public class SameNumberSubtraction {
 		 }
 		 return -1;
 	 }
+	 
+	 public int solution26(String[][] book_time) {
+		 PriorityQueue<int[]> pq = 
+		            new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0]));
+		 PriorityQueue<Integer> rooms = new PriorityQueue<>();
+		 
+			for (String[] temp : book_time) {
+				   pq.add(new int[] {
+			        Integer.parseInt(temp[0].substring(0, 2)) * 60 + 
+			        Integer.parseInt(temp[0].substring(3, 5)),
+			        Integer.parseInt(temp[1].substring(0, 2)) * 60 + 
+		            Integer.parseInt(temp[1].substring(3, 5)) + 10
+			    });	
+			}
+				 
+			rooms.add(pq.poll()[1]);
+			while (!pq.isEmpty()) {
+			    int[] book = pq.poll();
+
+			    if (!rooms.isEmpty() && rooms.peek() <= book[0]) {
+			        rooms.poll();
+			    }
+
+			    rooms.add(book[1]);
+			}
+			return rooms.size();
+	    }
+	 
+	 public String solution27(String number, int k) {
+		 List<Integer> list = new LinkedList<>();
+		 List<Integer> header = new LinkedList<>();
+		 int[] array = number.chars()
+			        .map(c -> c - '0')
+			        .toArray();
+		 
+		 for(int i=0; i<k+1; i++) {
+			 header.add(array[i]);
+		 }
+		 
+		 int start = 0;
+		 for (int i = 1; i < header.size(); i++) {
+			    if (header.get(i) > header.get(start)) {
+			        start = i;
+			    }
+			}
+		 
+		 return null;
+	 }
+	 
+	 public int solution28(String t, String p) {
+		 int count = 0;
+		 for(int i=0; i<t.length()-p.length(); i++) {
+			 String temp = t.substring(i, i+p.length()-1);
+			 
+			 if(Integer.parseInt(temp) >= Integer.parseInt(p) ) {
+				 count+=1;
+			 }
+		 }
+	      return count;
+	 }
+	 
+	 public int solution29(String s) {
+		 Queue<Character> queue = new LinkedList<>();
+		 int count = 1;
+		 int result = 0;
+		 
+		 for(int i=0; i<s.length(); i++) {
+			 queue.add(s.charAt(i));
+		 }
+		 
+		 char first = queue.poll();
+		 
+		 while(!queue.isEmpty()) {
+			 if(first == queue.poll()) {
+				 count+=1;
+			 }else {
+				 count-=1;
+			 }
+			 if(count == 0) {
+				 result+=1;
+				 if(!queue.isEmpty()) {
+					 first = queue.poll();
+					 count+=1;
+				 }
+			 }
+		 }
+		 
+		 if(count == 0) {
+			 result +=1;
+		 }
+	    return result;
+	}
 }
