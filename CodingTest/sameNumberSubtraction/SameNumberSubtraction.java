@@ -600,14 +600,194 @@ public class SameNumberSubtraction {
 				 result+=1;
 				 if(!queue.isEmpty()) {
 					 first = queue.poll();
-					 count+=1;
+					 count=1;
 				 }
 			 }
 		 }
 		 
-		 if(count == 0) {
+		 if(count != 0) {
 			 result +=1;
 		 }
 	    return result;
 	}
+	
+	 public int[] solution30(String[] keymap, String[] targets) {
+		 int[] result = new int[targets.length];
+		 for(int i=0; i<targets.length; i++) {
+			 for(int j=0; j<targets[i].length(); j++) {
+				 boolean contains = false;
+				 int temp = 1000;
+				 for(int k=0; k<keymap.length; k++) {
+					 for(int l=0; l<keymap[k].length(); l++) {
+						 if(targets[i].charAt(j) == keymap[k].charAt(l)) {
+							 temp = Math.min(temp, l+1);
+							 contains = true;
+						 }
+					 }
+				 }
+				 if(!contains) {
+					 result[i] = -1;
+					 break;
+				 } else {
+					 result[i] += temp;
+				 }
+			 }
+		 }
+	        return result;
+	    }
+	 
+	 public int[] solution31(String[] keymap, String[] targets) {
+		 Map<Character, Integer> map = new HashMap<>();
+		 int[] result = new int[targets.length];
+		 for(String key : keymap) {
+			 for(int i=0; i<key.length(); i++) {
+				 char temp = key.charAt(i);
+				 int process = i+1;
+				 
+				 if(!map.containsKey(temp)) {
+					 map.put(temp, process);
+				 }else {
+					 map.put(temp, Math.min(map.get(temp), process));
+				 }
+			 }
+		 }
+		 
+		 for(int i=0; i<targets.length; i++) {
+			for(int j=0; j<targets[i].length(); j++) {
+				if(!map.containsKey(targets[i].charAt(j))) {
+					result[i] = -1;
+					break;
+				} else {
+					result[i] += map.get(targets[i].charAt(j));
+				}
+				 
+			 }
+		 }
+		 return result;
+	 }
+	 
+	 public int[] solution32(int[] arr, int divisor) {
+		 List<Integer> list = new LinkedList<>();
+		 boolean temp = false;
+		 
+		 for(int i=0; i<arr.length; i++) {
+			 if(arr[i]%divisor == 0) {
+				 list.add(arr[i]);
+				 temp = true;
+			 }
+		 }
+		 
+		 if(!temp) {
+			 list.add(-1);
+		 }
+		 
+		 list.sort(null);
+	     return list.stream().mapToInt(Integer :: intValue).toArray();
+	    }
+	 
+	 public int[] solution33(int[] arr) {
+		 List<Integer> list = new ArrayList<>();
+		 int min = 1000;
+		 
+		 if(arr.length == 1) {
+			 return new int[] {-1};
+		 }
+		 for(int temp : arr) {
+			 list.add(temp);
+			 min = Math.min(temp, min);
+		 }
+		 
+		 list.remove(min);
+	     return list.stream().mapToInt(Integer :: intValue).toArray();
+	    }
+	 
+	 public int[] solution34(int[] arr) {
+		 List<Integer> list = new LinkedList<>();
+		 
+		 for(int i=0; i< arr.length; i++) {
+			 if(i+1 == arr.length) {
+				 list.add(arr[i]);
+			 }
+			 if(arr[i] != arr[i+1]) {
+				 list.add(arr[i]);
+			 }
+		 }
+		 return list.stream().mapToInt(Integer :: intValue).toArray();
+	 }
+	 
+	 public int solution35(String t, String p) {
+		 int result = 0;
+		 for(int i=0; i<t.length()-p.length(); i++) {
+			 if(Long.parseLong(t.substring(i, i+p.length())) >= Long.parseLong(p)) {
+				 result+=1;
+			 }
+		 }
+		 return result;
+	 }
+	 
+	 public int[] solution35(String[] park, String[] routes) {
+		 int[] start = new int[1];
+		 
+		 for(int i=0; i<park.length; i++) {
+			 if(park[i].contains("S")) {
+				 for(int j=0; j<park[i].length(); j++) {
+					 if(park[i].charAt(j) == 'S') {
+						 start = new int[] {i, j};
+					 }
+				 }
+			 }
+		 }
+		 
+		 for(int i=0; i<routes.length; i++) {
+			 int[] move = new int[1];
+			 int[] newStart = new int[] {start[0], start[1]};
+			 boolean temp = true;
+			 
+			 switch(routes[i].charAt(0)) {
+			 case 'N' :
+				 move = new int[] {-1, 0};
+				 break;
+				 
+			 case 'E' :
+		 		 move = new int[] {0, 1};
+		 		 break;
+		 		 
+			 case 'W' :
+		 		 move = new int[] {0, -1};
+		 		 break;
+		 		 
+		 	 case 'S' :
+		 		 move = new int[] {1, 0};
+		 		 break;
+			 }
+			 
+			 for(int j=0; j<Integer.parseInt(routes[i].substring(2)); j++) {
+				 int[] moving = new int[] {newStart[0] + move[0], newStart[1]+ move[1]};
+				 if(moving[0]>park.length && moving[0] >=0 && moving[1]>park.length && moving[1]>=0) {
+					 if(park[moving[0]].charAt(moving[1]) != 'X') {
+						 newStart = new int[] {moving[0], moving[1]};
+						 continue;
+					 }
+				 }else {
+					 temp = false;
+				 }
+			 }
+			 if(temp) {
+				start = new int[] {newStart[0], newStart[1]}; 
+			 }
+		 }
+		 return start;
+	 }
+	 public String[] solution36(String[] players, String[] callings) {
+		 Map<String, Integer> map = new HashMap<>();
+		 
+		 for(int i=0; i<players.length; i++) {
+			 map.put(players[i], i);
+		 }
+		 
+		 for(int i=0; i<callings.length; i++) {
+			 
+		 }
+	    return new String[] {null};
+	    }
 }
