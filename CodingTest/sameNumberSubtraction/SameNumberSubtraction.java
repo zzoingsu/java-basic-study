@@ -778,6 +778,7 @@ public class SameNumberSubtraction {
 		 }
 		 return start;
 	 }
+	 
 	 public String[] solution36(String[] players, String[] callings) {
 		 Map<String, Integer> map = new HashMap<>();
 		 
@@ -786,8 +787,34 @@ public class SameNumberSubtraction {
 		 }
 		 
 		 for(int i=0; i<callings.length; i++) {
+			 String player = callings[i];
+			 int rank = map.get(player);
+			 String header = players[rank-1];
 			 
+			 players[rank-1] = player;
+			 players[rank] = header;
 		 }
-	    return new String[] {null};
+		 
+	    return players;
+	    }
+	 
+	 public int solution37(int[] topping) {
+		 int result = 0;
+		 
+		 for(int i=0; i<topping.length; i++) {
+			 Set<Integer> mine = new HashSet<>();
+			 Set<Integer> your = new HashSet<>();
+			 
+			 for(int j=0; j<i; j++) {
+				 mine.add(topping[j]);
+			 }
+			 for(int k=i; k<topping.length; k++) {
+				 your.add(topping[k]);
+			 }
+			 if(mine.size() == your.size()) {
+				 result+=1;
+			 }
+		 }
+	    return result;
 	    }
 }
