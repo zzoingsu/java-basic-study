@@ -797,24 +797,76 @@ public class SameNumberSubtraction {
 		 
 	    return players;
 	    }
+	 
 	 // 슬라이딩 윈도우
 	 public int solution37(int[] topping) {
+		 Set<Integer> mine = new HashSet<>();
+		 Map<Integer, Integer> your = new HashMap<>();
 		 int result = 0;
 		 
+		 for(int temp : topping) {
+			 your.put(temp, your.getOrDefault(temp, 0) +1);
+		 }
+		 
 		 for(int i=0; i<topping.length; i++) {
-			 Set<Integer> mine = new HashSet<>();
-			 Set<Integer> your = new HashSet<>();
+			 int temp = topping[i];
 			 
-			 for(int j=0; j<i; j++) {
-				 mine.add(topping[j]);
+			 mine.add(temp);
+			 your.put(temp, your.get(temp)-1);
+			 
+			 if(your.get(temp) == 0) {
+				 your.remove(temp);
 			 }
-			 for(int k=i; k<topping.length; k++) {
-				 your.add(topping[k]);
-			 }
+			 
 			 if(mine.size() == your.size()) {
-				 result+=1;
+				 result +=1;
 			 }
 		 }
 	    return result;
 	    }
+	 
+	 public int solution38(int[] order) {
+		 Queue<Integer> queue = new LinkedList<>();
+		 Stack<Integer>  stack = new Stack<>();
+		 int result = 0;
+		 
+		 for(int temp : order) {
+			 queue.add(temp);
+		 }
+		 
+		 for(int i=0; i<order.length; i++) {
+			 int temp = queue.poll();
+			 if(temp == i) {
+				 result +=1;
+				 
+				 while(!stack.isEmpty() && !queue.isEmpty()) {
+					 if(stack.peek().equals(queue.peek())) {
+						 queue.poll();
+						 stack.pop();
+						 result+=1;
+					 }
+				 }
+			 }else {
+				 stack.add(temp);
+			 }
+		 }
+		 return result;
+	 }
+	 
+	 public int solution(String[][] clothes) {
+		 Map<String, Integer> map = new HashMap<>();
+		 int result = 1;
+		 
+		 for(String[] temp : clothes) {
+			 map.put(temp[1], map.getOrDefault(temp[1], 0) +1);
+			 }
+		 
+		 for (int count : map.values()) {
+
+			    result *= (count + 1);
+
+			}
+		 
+		 return result-1;
+	 }
 }
