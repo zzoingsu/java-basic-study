@@ -797,7 +797,7 @@ public class SameNumberSubtraction {
 		 
 	    return players;
 	    }
-	 
+	 // 슬라이딩 윈도우
 	 public int solution37(int[] topping) {
 		 int result = 0;
 		 
