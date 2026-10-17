@@ -853,7 +853,7 @@ public class SameNumberSubtraction {
 		 return result;
 	 }
 	 
-	 public int solution(String[][] clothes) {
+	 public int solution39(String[][] clothes) {
 		 Map<String, Integer> map = new HashMap<>();
 		 int result = 1;
 		 
@@ -869,4 +869,93 @@ public class SameNumberSubtraction {
 		 
 		 return result-1;
 	 }
+	 
+	 public int[] solution40(String s) {
+		 String temp = s.substring(2, s.length() - 2);
+		 String[] arr = temp.split("\\},\\{");
+		 Arrays.sort(arr, Comparator.comparingInt(String::length));
+		 int[] result = new int[arr.length];
+		 int index = 0;
+		 
+		 for(int i=0; i<arr.length; i++) {
+			String[] number = arr[i].split(",");
+			
+			for(int j=0; j<number.length; j++) {
+				int n = Integer.parseInt(number[j]);
+				boolean visited = false;
+			
+				for(int k=0; k<index; k++) {
+					if(n == result[k]) {
+						visited = true;
+						break;
+					}
+				}
+				if(!visited) {
+					result[index++] = n;
+				}
+			}
+		 }
+		 return result;
+	    }
+	 
+	 public int[] solution40_1(String s) {
+		 String temp = s.substring(2, s.length() - 2);
+		 String[] arr = temp.split("\\},\\{");
+		 Arrays.sort(arr, Comparator.comparingInt(String::length));
+		 Set<String> set = new HashSet<>();
+		 int index = 0;
+		 int[] result = new int[arr.length];
+		 
+		 for(String numbers : arr) {
+			 String[] number = numbers.split(",");
+			 for(int i=0; i<number.length; i++) {
+				 if(!set.contains(number[i])) {
+					 set.add(number[i]);
+					 result[index++] = Integer.parseInt(number[i]);
+				 }
+			 }
+		 }
+		 return result;
+	 }
+	 
+	 public int solution41(String dirs) {
+		 int[] start = new int[] {5,5};
+		 Set<String> set = new HashSet<>();
+		 int result = 0;
+		 
+		 for(int i=0; i<dirs.length(); i++) {
+			 int[] move = start;
+			 
+			 switch(dirs.charAt(i)) {
+			 case 'U' : move = new int[] {move[0] +1, move[1]}; 
+			 break;
+			 
+			 case 'D' : move = new int[] {move[0] -1, move[1]};
+			 break;
+			 
+			 case 'L' : move = new int[] {move[0], move[1]-1};
+			 break;
+			 
+			 case 'R' : move = new int[] {move[0], move[1]+1};
+			 break;
+			 }
+			 
+			 if(move[0]<0 || move[0]>10 || move[1]<0 || move[1]>10) {
+				 continue;
+			 }
+			 if(set.contains(start[0] + "-" + start[1]
+			            + "-" + move[0] + "-" + move[1])) {
+                 start = move;
+				 continue;
+			 }
+			 set.add(start[0] + "-" + start[1]
+			            + "-" + move[0] + "-" + move[1]);
+			 set.add(move[0] + "-" + move[1]
+
+               + "-" + start[0] + "-" + start[1]);
+			 start = move;
+             result +=1;
+		 }
+	        return result;
+	    }
 }
